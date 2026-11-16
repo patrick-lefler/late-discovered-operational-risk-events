@@ -1,5 +1,6 @@
 ---
 title: "Reproducibility and Limitations"
+subtitle: "How to rebuild every number, and where the model can mislead"
 execute:
   freeze: false
 ---
@@ -211,6 +212,6 @@ The numbers on this site are illustrations of method behaviour. They should not 
 ```{r}
 #| label: session-information
 #| echo: false
-utils::sessionInfo()
+sessioninfo::session_info()
 ```
 :::

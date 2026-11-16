@@ -1,5 +1,6 @@
 ---
 title: "Synthetic Data"
+subtitle: "A simulated loss database with a known ground truth"
 ---
 
 ```{r}
@@ -58,9 +59,6 @@ Each row is an event type. The columns show how often events occur, how many qua
 **What the table tells you** <br/>
 The three event types are very different risks. Trade errors are frequent (about `r sprintf("%.0f", params$event_types$trade_error$lambda)` a quarter) and small, and are found at once, while unauthorized trading is rare (about one event a year) but large, takes a median of `r lag_stats$median[lag_stats$type == "Unauthorized trading"]` quarters to find, and grows the most while hidden.
 
-**Parameters table insights** <br/>
-The three event types differ mainly in how often they occur, how fast they are found, and how large they are. Trade errors are frequent, small and found at once, while unauthorized trading is rare (about one event every three years) but large, found only after about six quarters in the typical case, and the late ones can take up to five or six years.
-
 ## Discovery-Lag Distributions
 
 ```{r}
@@ -81,7 +79,7 @@ lags |>
   theme_op()
 ```
 
-**How to read the Discovery-Lag Distributions plot** <br/>
+**How to read the plot** <br/>
 Each bar shows the share of events found a given number of quarters after they happened, so bars clustered at the left mean fast detection and a long spread to the right means slow detection.
 
 **What the plot tells you** <br/>

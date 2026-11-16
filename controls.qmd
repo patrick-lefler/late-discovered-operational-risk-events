@@ -1,5 +1,6 @@
 ---
 title: "Control Value"
+subtitle: "What faster detection is worth in expected and tail loss"
 ---
 
 ```{r}

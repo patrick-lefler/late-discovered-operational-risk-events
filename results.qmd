@@ -1,5 +1,6 @@
 ---
 title: "Results"
+subtitle: "How well does each method estimate the losses not yet discovered?"
 ---
 
 ```{r}
