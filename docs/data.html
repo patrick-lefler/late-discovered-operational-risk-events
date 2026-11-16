@@ -208,6 +208,7 @@ window.Quarto = {
 <header id="title-block-header" class="quarto-title-block default">
 <div class="quarto-title">
 <h1 class="title">Synthetic Data</h1>
+<p class="subtitle lead">A simulated loss database with a known ground truth</p>
 </div>
 
 
@@ -779,7 +780,6 @@ Table&nbsp;1
 </div>
 <p><strong>How to read the table</strong> <br> Each row is an event type. The columns show how often events occur, how many quarters they typically take to be found (median and 90th percentile), how large they are, and how much their size grows for each quarter they stay hidden.</p>
 <p><strong>What the table tells you</strong> <br> The three event types are very different risks. Trade errors are frequent (about 60 a quarter) and small, and are found at once, while unauthorized trading is rare (about one event a year) but large, takes a median of 6 quarters to find, and grows the most while hidden.</p>
-<p><strong>Parameters table insights</strong> <br> The three event types differ mainly in how often they occur, how fast they are found, and how large they are. Trade errors are frequent, small and found at once, while unauthorized trading is rare (about one event every three years) but large, found only after about six quarters in the typical case, and the late ones can take up to five or six years.</p>
 </section>
 <section id="discovery-lag-distributions" class="level2">
 <h2 class="anchored" data-anchor-id="discovery-lag-distributions">Discovery-Lag Distributions</h2>
@@ -812,7 +812,7 @@ Figure&nbsp;1: Simulated share of events by discovery lag, per event type (200,0
 </div>
 </div>
 </div>
-<p><strong>How to read the Discovery-Lag Distributions plot</strong> <br> Each bar shows the share of events found a given number of quarters after they happened, so bars clustered at the left mean fast detection and a long spread to the right means slow detection.</p>
+<p><strong>How to read the plot</strong> <br> Each bar shows the share of events found a given number of quarters after they happened, so bars clustered at the left mean fast detection and a long spread to the right means slow detection.</p>
 <p><strong>What the plot tells you</strong> <br> Detection speed differs sharply by event type. The median number of quarters to discovery is Trade errors: 0, NAV errors: 2, Unauthorized trading: 6, so trade errors are found almost at once while unauthorized trading often runs for years. The share of events discovered after the 40-quarter window is Trade errors 0.0%, NAV errors 0.1%, Unauthorized trading 2.7%, so few events fall outside the window, but for unauthorized trading they matter. <br></p>
 <p>Loss grows while an event stays hidden, up to 4.2 times the initial size, and the measure here counts only loss that is still undiscovered. So the 2.7% of unauthorized-trading events beyond the window carry about 40% of the true undiscovered unauthorized-trading loss at the evaluation date (baseline, annual granularity, 200 databases). <br></p>
 <p>This is why a standard method that looks only inside the 10-year history misses so much of that line.</p>
@@ -1808,6 +1808,19 @@ Table&nbsp;2
   </div>
 </nav>
 </div> <!-- /content -->
+<footer class="footer">
+  <div class="nav-footer">
+    <div class="nav-footer-left">
+      &nbsp;
+    </div>   
+    <div class="nav-footer-center">
+<p>© 2026 Patrick Lefler ⦁ <a href="./license.html">MIT License</a> ⦁ Built with R &amp; Quarto</p>
+</div>
+    <div class="nav-footer-right">
+      &nbsp;
+    </div>
+  </div>
+</footer>
 
 
 
