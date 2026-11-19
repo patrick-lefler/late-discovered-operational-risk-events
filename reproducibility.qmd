@@ -21,8 +21,7 @@ git_state <- function() {
 This page documents how to rebuild every number on the site, and checks a few of those claims live: the tests, the environment status and the parameter staleness check re-run every time this page is rendered (it is excluded from the project-wide `freeze: auto` cache).
 
 ## One command
-
-From a clean clone:
+The GitHub repository can be found [here](https://github.com/patrick-lefler/late-discovered-operational-risk-events). From a clean clone:
 
 ```sh
 Rscript -e 'renv::restore()'   # once: package versions from renv.lock
