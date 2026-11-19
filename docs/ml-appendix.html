@@ -73,7 +73,10 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <link href="site_libs/quarto-html/quarto-syntax-highlighting-587c61ba64f3a5504c4d52d930310e48.css" rel="stylesheet" id="quarto-text-highlighting-styles">
 <script src="site_libs/bootstrap/bootstrap.min.js"></script>
 <link href="site_libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
-<link href="site_libs/bootstrap/bootstrap-14fc7787e48927cca1cfdea7cd9d3ef6.min.css" rel="stylesheet" append-hash="true" id="quarto-bootstrap" data-mode="light">
+<link href="site_libs/bootstrap/bootstrap-315aa354fbfbfd45b4b76e88c3271fce.min.css" rel="stylesheet" append-hash="true" id="quarto-bootstrap" data-mode="light">
+<script src="site_libs/quarto-contrib/glightbox/glightbox.min.js"></script>
+<link href="site_libs/quarto-contrib/glightbox/glightbox.min.css" rel="stylesheet">
+<link href="site_libs/quarto-contrib/glightbox/lightbox.css" rel="stylesheet">
 <script id="quarto-search-options" type="application/json">{
   "language": {
     "search-no-results-text": "No results",
@@ -89,6 +92,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
     "search-label": "Search"
   }
 }</script>
+<style>html{ scroll-behavior: smooth; }</style>
 
 
 </head>
@@ -109,7 +113,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
   </nav>
 </header>
 <!-- content -->
-<div id="quarto-content" class="quarto-container page-columns page-rows-contents page-layout-article">
+<div id="quarto-content" class="quarto-container page-columns page-rows-contents page-layout-full">
 <!-- sidebar -->
   <nav id="quarto-sidebar" class="sidebar collapse collapse-horizontal quarto-sidebar-collapse-item sidebar-navigation floating overflow-auto">
     <div class="pt-lg-2 mt-2 text-left sidebar-header">
@@ -147,7 +151,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
         <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="./reproducibility.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text">Reproducibility &amp; Limitations</span></a>
+ <span class="menu-text">Reproducibility</span></a>
   </div>
 </li>
         <li class="sidebar-item">
@@ -163,7 +167,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <!-- margin-sidebar -->
     <div id="quarto-margin-sidebar" class="sidebar margin-sidebar">
         <nav id="TOC" role="doc-toc" class="toc-active">
-    <h2 id="toc-title">On this page</h2>
+    <h2 id="toc-title">contents</h2>
    
   <ul>
   <li><a href="#what-it-does" id="toc-what-it-does" class="nav-link active" data-scroll-target="#what-it-does">What it does</a></li>
@@ -172,17 +176,17 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </nav>
     </div>
 <!-- main -->
-<main class="content" id="quarto-document-content">
+<main class="content column-body" id="quarto-document-content">
 
 <header id="title-block-header" class="quarto-title-block default">
 <div class="quarto-title">
-<h1 class="title">Experimental: ML Reserving</h1>
+<div class="quarto-title-block"><div><h1 class="title">Experimental: ML Reserving</h1><button type="button" class="btn code-tools-button dropdown-toggle" id="quarto-code-tools-menu" data-bs-toggle="dropdown" aria-expanded="false"><i class="bi"></i> Code</button><ul class="dropdown-menu dropdown-menu-end" aria-labelelledby="quarto-code-tools-menu"><li><a id="quarto-show-all-code" class="dropdown-item" href="javascript:void(0)" role="button">Show All Code</a></li><li><a id="quarto-hide-all-code" class="dropdown-item" href="javascript:void(0)" role="button">Hide All Code</a></li><li><hr class="dropdown-divider"></li><li><a id="quarto-view-source" class="dropdown-item" href="javascript:void(0)" role="button">View Source</a></li></ul></div></div>
 <p class="subtitle lead">A machine-learning reserving comparator, kept outside the main conclusions</p>
 </div>
 
 
 
-<div class="quarto-title-meta">
+<div class="quarto-title-meta column-body">
 
     
   
@@ -1435,7 +1439,7 @@ Table&nbsp;2
 <div id="fig-ml" class="quarto-float quarto-figure quarto-figure-center anchored" width="672">
 <figure class="quarto-float quarto-float-fig figure">
 <div aria-describedby="fig-ml-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
-<img src="ml-appendix_files/figure-html/fig-ml-1.png" id="fig-ml" class="img-fluid figure-img" width="672">
+<a href="ml-appendix_files/figure-html/fig-ml-1.png" class="lightbox" data-gallery="quarto-lightbox-gallery-1" title="Figure&nbsp;1: "><img src="ml-appendix_files/figure-html/fig-ml-1.png" id="fig-ml" class="img-fluid figure-img" width="672"></a>
 </div>
 <figcaption class="quarto-float-caption-bottom quarto-float-caption quarto-float-fig quarto-uncaptioned" id="fig-ml-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
 Figure&nbsp;1
@@ -1468,6 +1472,8 @@ Figure&nbsp;1
 </ul>
 <p>Taken together, this is a limited test, on one data-generating process, with no tuning, of an unreleased fork. It gives no support for using <code>mlReserve</code> here, and it does not show that the approach cannot work with more data or tuning.</p>
 
+
+<!-- -->
 
 </section>
 </section>
@@ -1543,6 +1549,57 @@ Figure&nbsp;1
         container: window.document.getElementById('quarto-embedded-source-code-modal')
       });
       clipboardModal.on('success', onCopySuccess);
+    }
+    const viewSource = window.document.getElementById('quarto-view-source') ||
+                       window.document.getElementById('quarto-code-tools-source');
+    if (viewSource) {
+      const sourceUrl = viewSource.getAttribute("data-quarto-source-url");
+      viewSource.addEventListener("click", function(e) {
+        if (sourceUrl) {
+          // rstudio viewer pane
+          if (/\bcapabilities=\b/.test(window.location)) {
+            window.open(sourceUrl);
+          } else {
+            window.location.href = sourceUrl;
+          }
+        } else {
+          const modal = new bootstrap.Modal(document.getElementById('quarto-embedded-source-code-modal'));
+          modal.show();
+        }
+        return false;
+      });
+    }
+    function toggleCodeHandler(show) {
+      return function(e) {
+        const detailsSrc = window.document.querySelectorAll(".cell > details > .sourceCode");
+        for (let i=0; i<detailsSrc.length; i++) {
+          const details = detailsSrc[i].parentElement;
+          if (show) {
+            details.open = true;
+          } else {
+            details.removeAttribute("open");
+          }
+        }
+        const cellCodeDivs = window.document.querySelectorAll(".cell > .sourceCode");
+        const fromCls = show ? "hidden" : "unhidden";
+        const toCls = show ? "unhidden" : "hidden";
+        for (let i=0; i<cellCodeDivs.length; i++) {
+          const codeDiv = cellCodeDivs[i];
+          if (codeDiv.classList.contains(fromCls)) {
+            codeDiv.classList.remove(fromCls);
+            codeDiv.classList.add(toCls);
+          } 
+        }
+        return false;
+      }
+    }
+    const hideAllCode = window.document.getElementById("quarto-hide-all-code");
+    if (hideAllCode) {
+      hideAllCode.addEventListener("click", toggleCodeHandler(false));
+    }
+    const showAllCode = window.document.getElementById("quarto-show-all-code");
+    if (showAllCode) {
+      showAllCode.addEventListener("click", toggleCodeHandler(true));
     }
       var localhostRegex = new RegExp(/^(?:http|https):\/\/localhost\:?[0-9]*\//);
       var mailtoRegex = new RegExp(/^mailto:/);
@@ -1873,15 +1930,142 @@ Figure&nbsp;1
     }
   });
   </script>
-<nav class="page-navigation">
+<nav class="page-navigation column-body">
   <div class="nav-page nav-page-previous">
-      <a href="./reproducibility.html" class="pagination-link" aria-label="Reproducibility &amp; Limitations">
-        <i class="bi bi-arrow-left-short"></i> <span class="nav-page-text">Reproducibility &amp; Limitations</span>
+      <a href="./reproducibility.html" class="pagination-link" aria-label="Reproducibility">
+        <i class="bi bi-arrow-left-short"></i> <span class="nav-page-text">Reproducibility</span>
       </a>          
   </div>
   <div class="nav-page nav-page-next">
   </div>
-</nav>
+</nav><div class="modal fade" id="quarto-embedded-source-code-modal" tabindex="-1" aria-labelledby="quarto-embedded-source-code-modal-label" aria-hidden="true"><div class="modal-dialog modal-dialog-scrollable"><div class="modal-content"><div class="modal-header"><h5 class="modal-title" id="quarto-embedded-source-code-modal-label">Source Code</h5><button class="btn-close" data-bs-dismiss="modal"></button></div><div class="modal-body"><div class="">
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb6" data-shortcodes="false"><pre class="sourceCode markdown code-with-copy"><code class="sourceCode markdown"><span id="cb6-1"><a href="#cb6-1" aria-hidden="true" tabindex="-1"></a><span class="co">---</span></span>
+<span id="cb6-2"><a href="#cb6-2" aria-hidden="true" tabindex="-1"></a><span class="an">title:</span><span class="co"> "Experimental: ML Reserving"</span></span>
+<span id="cb6-3"><a href="#cb6-3" aria-hidden="true" tabindex="-1"></a><span class="an">subtitle:</span><span class="co"> "A machine-learning reserving comparator, kept outside the main conclusions"</span></span>
+<span id="cb6-4"><a href="#cb6-4" aria-hidden="true" tabindex="-1"></a><span class="co">---</span></span>
+<span id="cb6-5"><a href="#cb6-5" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb6-8"><a href="#cb6-8" aria-hidden="true" tabindex="-1"></a><span class="in">```{r}</span></span>
+<span id="cb6-9"><a href="#cb6-9" aria-hidden="true" tabindex="-1"></a><span class="co">#| label: setup</span></span>
+<span id="cb6-10"><a href="#cb6-10" aria-hidden="true" tabindex="-1"></a><span class="co">#| include: false</span></span>
+<span id="cb6-11"><a href="#cb6-11" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(tidyverse)</span>
+<span id="cb6-12"><a href="#cb6-12" aria-hidden="true" tabindex="-1"></a><span class="cf">for</span> (f <span class="cf">in</span> <span class="fu">list.files</span>(<span class="st">"R"</span>, <span class="at">full.names =</span> <span class="cn">TRUE</span>)) <span class="fu">source</span>(f)</span>
+<span id="cb6-13"><a href="#cb6-13" aria-hidden="true" tabindex="-1"></a>res <span class="ot">&lt;-</span> <span class="fu">load_results</span>()</span>
+<span id="cb6-14"><a href="#cb6-14" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
+<span id="cb6-15"><a href="#cb6-15" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb6-16"><a href="#cb6-16" aria-hidden="true" tabindex="-1"></a>An experimental comparator, kept out of the main <span class="co">[</span><span class="ot">Results</span><span class="co">](results.qmd)</span> page because it does not feed the conclusions on the <span class="co">[</span><span class="ot">Overview</span><span class="co">](index.qmd)</span>.</span>
+<span id="cb6-17"><a href="#cb6-17" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb6-20"><a href="#cb6-20" aria-hidden="true" tabindex="-1"></a><span class="in">```{r}</span></span>
+<span id="cb6-21"><a href="#cb6-21" aria-hidden="true" tabindex="-1"></a><span class="co">#| label: ml-setup</span></span>
+<span id="cb6-22"><a href="#cb6-22" aria-hidden="true" tabindex="-1"></a><span class="co">#| include: false</span></span>
+<span id="cb6-23"><a href="#cb6-23" aria-hidden="true" tabindex="-1"></a>ml <span class="ot">&lt;-</span> <span class="fu">readRDS</span>(<span class="st">"data/mlreserve.rds"</span>)</span>
+<span id="cb6-24"><a href="#cb6-24" aria-hidden="true" tabindex="-1"></a>cfg <span class="ot">&lt;-</span> <span class="fu">load_params</span>()<span class="sc">$</span>mlreserve</span>
+<span id="cb6-25"><a href="#cb6-25" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
+<span id="cb6-26"><a href="#cb6-26" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb6-27"><a href="#cb6-27" aria-hidden="true" tabindex="-1"></a>::: {.callout-warning}</span>
+<span id="cb6-28"><a href="#cb6-28" aria-hidden="true" tabindex="-1"></a><span class="fu">### Experimental, excluded from headline results</span></span>
+<span id="cb6-29"><a href="#cb6-29" aria-hidden="true" tabindex="-1"></a><span class="in">`mlReserve()`</span> comes from a personal fork of the ChainLadder package (<span class="in">`thierrymoudiki/ChainLadder`</span>, pinned to commit <span class="in">`r substr(ml$commit, 1, 8)`</span>, package version <span class="in">`r ml$fork_version`</span>), not from CRAN. Its published evidence is a blog post using simulated insurance triangles. It was installed into an isolated library so the CRAN ChainLadder used on every other page is unaffected. Nothing on this page feeds the executive summary.</span>
+<span id="cb6-30"><a href="#cb6-30" aria-hidden="true" tabindex="-1"></a>:::</span>
+<span id="cb6-31"><a href="#cb6-31" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb6-32"><a href="#cb6-32" aria-hidden="true" tabindex="-1"></a><span class="fu">### What it does</span></span>
+<span id="cb6-33"><a href="#cb6-33" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb6-34"><a href="#cb6-34" aria-hidden="true" tabindex="-1"></a><span class="in">`mlReserve()`</span> fits a machine-learning regression (here a random forest from <span class="in">`ranger`</span> or a support vector machine from <span class="in">`e1071`</span>) to the observed cells of a triangle, using origin and development period as features, and predicts the unobserved cells. It is a different idea from chain-ladder's multiplicative development factors.</span>
+<span id="cb6-35"><a href="#cb6-35" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb6-36"><a href="#cb6-36" aria-hidden="true" tabindex="-1"></a><span class="fu">### The test</span></span>
+<span id="cb6-37"><a href="#cb6-37" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb6-38"><a href="#cb6-38" aria-hidden="true" tabindex="-1"></a>Same simulated databases as the baseline validation (replications 1-<span class="in">`r cfg$n_reps`</span>), annual dollar triangles, scored on the undiscovered loss inside the window. Four configurations are run and **all are reported**; none was chosen using the true values. The first is the setting used in the blog post. Point estimates only (no bootstrap intervals).</span>
+<span id="cb6-39"><a href="#cb6-39" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb6-42"><a href="#cb6-42" aria-hidden="true" tabindex="-1"></a><span class="in">```{r}</span></span>
+<span id="cb6-43"><a href="#cb6-43" aria-hidden="true" tabindex="-1"></a><span class="co">#| label: tbl-ml-configs</span></span>
+<span id="cb6-44"><a href="#cb6-44" aria-hidden="true" tabindex="-1"></a><span class="fu">tibble</span>(<span class="at">Configuration =</span> <span class="fu">names</span>(cfg<span class="sc">$</span>configs),</span>
+<span id="cb6-45"><a href="#cb6-45" aria-hidden="true" tabindex="-1"></a>       <span class="at">Learner =</span> <span class="fu">map_chr</span>(cfg<span class="sc">$</span>configs, <span class="st">"learner"</span>), <span class="at">Features =</span> <span class="fu">map_chr</span>(cfg<span class="sc">$</span>configs, <span class="st">"features"</span>), <span class="at">Transform =</span> <span class="fu">map_chr</span>(cfg<span class="sc">$</span>configs, <span class="st">"transform"</span>)) <span class="sc">|&gt;</span></span>
+<span id="cb6-46"><a href="#cb6-46" aria-hidden="true" tabindex="-1"></a>  gt<span class="sc">::</span><span class="fu">gt</span>()</span>
+<span id="cb6-47"><a href="#cb6-47" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
+<span id="cb6-48"><a href="#cb6-48" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb6-49"><a href="#cb6-49" aria-hidden="true" tabindex="-1"></a>**How to read the table** <span class="dt">&lt;</span><span class="kw">br</span><span class="dt">/&gt;</span></span>
+<span id="cb6-50"><a href="#cb6-50" aria-hidden="true" tabindex="-1"></a>Each row is one setting of the machine-learning method: which learning algorithm, which inputs and whether the data were transformed first.</span>
+<span id="cb6-51"><a href="#cb6-51" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb6-52"><a href="#cb6-52" aria-hidden="true" tabindex="-1"></a>**What the table tells you** <span class="dt">&lt;</span><span class="kw">br</span><span class="dt">/&gt;</span></span>
+<span id="cb6-53"><a href="#cb6-53" aria-hidden="true" tabindex="-1"></a>Six settings were tried and all are reported, including the setting used in the method's published blog post, and none was chosen after seeing the true answer.</span>
+<span id="cb6-54"><a href="#cb6-54" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb6-57"><a href="#cb6-57" aria-hidden="true" tabindex="-1"></a><span class="in">```{r}</span></span>
+<span id="cb6-58"><a href="#cb6-58" aria-hidden="true" tabindex="-1"></a><span class="co">#| label: ml-scores</span></span>
+<span id="cb6-59"><a href="#cb6-59" aria-hidden="true" tabindex="-1"></a>ref <span class="ot">&lt;-</span> res<span class="sc">$</span>reps <span class="sc">|&gt;</span></span>
+<span id="cb6-60"><a href="#cb6-60" aria-hidden="true" tabindex="-1"></a>  <span class="fu">filter</span>(scenario <span class="sc">==</span> <span class="st">"baseline"</span>, granularity <span class="sc">==</span> <span class="st">"annual"</span>, kind <span class="sc">==</span> <span class="st">"amount"</span>, rep <span class="sc">&lt;=</span> cfg<span class="sc">$</span>n_reps,</span>
+<span id="cb6-61"><a href="#cb6-61" aria-hidden="true" tabindex="-1"></a>         method <span class="sc">%in%</span> <span class="fu">c</span>(<span class="st">"mack"</span>, <span class="st">"boot"</span>, <span class="st">"freq_x_sev"</span>)) <span class="sc">|&gt;</span></span>
+<span id="cb6-62"><a href="#cb6-62" aria-hidden="true" tabindex="-1"></a>  <span class="fu">transmute</span>(type, <span class="at">config =</span> method_lab[method], <span class="at">est =</span> <span class="fu">if_else</span>(status <span class="sc">==</span> <span class="st">"ok"</span>, est, <span class="cn">NA_real_</span>), <span class="at">truth =</span> truth_window, rep)</span>
+<span id="cb6-63"><a href="#cb6-63" aria-hidden="true" tabindex="-1"></a>mlr <span class="ot">&lt;-</span> ml<span class="sc">$</span>results <span class="sc">|&gt;</span> <span class="fu">transmute</span>(type, <span class="at">config =</span> <span class="fu">paste</span>(<span class="st">"mlReserve:"</span>, config), <span class="at">est =</span> <span class="fu">if_else</span>(status <span class="sc">==</span> <span class="st">"ok"</span>, est, <span class="cn">NA_real_</span>), truth, rep)</span>
+<span id="cb6-64"><a href="#cb6-64" aria-hidden="true" tabindex="-1"></a>cmp <span class="ot">&lt;-</span> <span class="fu">bind_rows</span>(ref, mlr)</span>
+<span id="cb6-65"><a href="#cb6-65" aria-hidden="true" tabindex="-1"></a>sc_ml <span class="ot">&lt;-</span> cmp <span class="sc">|&gt;</span></span>
+<span id="cb6-66"><a href="#cb6-66" aria-hidden="true" tabindex="-1"></a>  <span class="fu">summarise</span>(</span>
+<span id="cb6-67"><a href="#cb6-67" aria-hidden="true" tabindex="-1"></a>    <span class="at">usable =</span> <span class="fu">sum</span>(<span class="fu">is.finite</span>(est)),</span>
+<span id="cb6-68"><a href="#cb6-68" aria-hidden="true" tabindex="-1"></a>    <span class="at">rel_bias =</span> <span class="fu">sum</span>(est <span class="sc">-</span> truth, <span class="at">na.rm =</span> <span class="cn">TRUE</span>) <span class="sc">/</span> <span class="fu">sum</span>(truth[<span class="fu">is.finite</span>(est)]),</span>
+<span id="cb6-69"><a href="#cb6-69" aria-hidden="true" tabindex="-1"></a>    <span class="at">median_ratio =</span> <span class="fu">median</span>(est <span class="sc">/</span> truth, <span class="at">na.rm =</span> <span class="cn">TRUE</span>),</span>
+<span id="cb6-70"><a href="#cb6-70" aria-hidden="true" tabindex="-1"></a>    <span class="at">.by =</span> <span class="fu">c</span>(type, config)</span>
+<span id="cb6-71"><a href="#cb6-71" aria-hidden="true" tabindex="-1"></a>  ) <span class="sc">|&gt;</span></span>
+<span id="cb6-72"><a href="#cb6-72" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(<span class="at">type =</span> <span class="fu">factor</span>(type_lab[type], <span class="at">levels =</span> type_lab)) <span class="sc">|&gt;</span></span>
+<span id="cb6-73"><a href="#cb6-73" aria-hidden="true" tabindex="-1"></a>  <span class="fu">arrange</span>(type, config)</span>
+<span id="cb6-74"><a href="#cb6-74" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
+<span id="cb6-75"><a href="#cb6-75" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb6-78"><a href="#cb6-78" aria-hidden="true" tabindex="-1"></a><span class="in">```{r}</span></span>
+<span id="cb6-79"><a href="#cb6-79" aria-hidden="true" tabindex="-1"></a><span class="co">#| label: tbl-ml</span></span>
+<span id="cb6-80"><a href="#cb6-80" aria-hidden="true" tabindex="-1"></a>sc_ml <span class="sc">|&gt;</span></span>
+<span id="cb6-81"><a href="#cb6-81" aria-hidden="true" tabindex="-1"></a>  gt<span class="sc">::</span><span class="fu">gt</span>(<span class="at">groupname_col =</span> <span class="st">"type"</span>) <span class="sc">|&gt;</span></span>
+<span id="cb6-82"><a href="#cb6-82" aria-hidden="true" tabindex="-1"></a>  gt<span class="sc">::</span><span class="fu">fmt_percent</span>(rel_bias, <span class="at">decimals =</span> <span class="dv">0</span>) <span class="sc">|&gt;</span></span>
+<span id="cb6-83"><a href="#cb6-83" aria-hidden="true" tabindex="-1"></a>  gt<span class="sc">::</span><span class="fu">fmt_number</span>(median_ratio, <span class="at">decimals =</span> <span class="dv">2</span>) <span class="sc">|&gt;</span></span>
+<span id="cb6-84"><a href="#cb6-84" aria-hidden="true" tabindex="-1"></a>  gt<span class="sc">::</span><span class="fu">cols_label</span>(<span class="at">config =</span> <span class="st">"Method"</span>, <span class="at">usable =</span> <span class="st">"Usable fits"</span>, <span class="at">rel_bias =</span> <span class="st">"Relative bias"</span>, <span class="at">median_ratio =</span> <span class="st">"Median estimate / truth"</span>) <span class="sc">|&gt;</span></span>
+<span id="cb6-85"><a href="#cb6-85" aria-hidden="true" tabindex="-1"></a>  gt<span class="sc">::</span><span class="fu">sub_missing</span>(<span class="at">missing_text =</span> <span class="st">"-"</span>)</span>
+<span id="cb6-86"><a href="#cb6-86" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
+<span id="cb6-87"><a href="#cb6-87" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb6-88"><a href="#cb6-88" aria-hidden="true" tabindex="-1"></a>**How to read the table** <span class="dt">&lt;</span><span class="kw">br</span><span class="dt">/&gt;</span></span>
+<span id="cb6-89"><a href="#cb6-89" aria-hidden="true" tabindex="-1"></a>Each block is an event type. "Median estimate / truth" shows how many times the true loss the method estimated in a typical database, so 1.00 is exact, 2.00 is twice too high and 0.50 is half.</span>
+<span id="cb6-90"><a href="#cb6-90" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb6-91"><a href="#cb6-91" aria-hidden="true" tabindex="-1"></a>**What the table tells you** <span class="dt">&lt;</span><span class="kw">br</span><span class="dt">/&gt;</span></span>
+<span id="cb6-92"><a href="#cb6-92" aria-hidden="true" tabindex="-1"></a>On NAV errors the machine-learning settings are at best <span class="in">`r sprintf("%.1f", min(sc_ml$median_ratio[sc_ml$type == "NAV errors" &amp; grepl("^mlReserve", sc_ml$config)]))`</span> times the truth, against <span class="in">`r sprintf("%.2f", sc_ml$median_ratio[sc_ml$type == "NAV errors" &amp; sc_ml$config == "Mack (package)"])`</span> for the standard Mack method. For trade errors the best is <span class="in">`r sprintf("%.0f", min(sc_ml$median_ratio[sc_ml$type == "Trade errors" &amp; grepl("^mlReserve", sc_ml$config)]))`</span> times, so the experimental method overstates the missing loss by large multiples where standard methods are accurate.</span>
+<span id="cb6-93"><a href="#cb6-93" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb6-96"><a href="#cb6-96" aria-hidden="true" tabindex="-1"></a><span class="in">```{r}</span></span>
+<span id="cb6-97"><a href="#cb6-97" aria-hidden="true" tabindex="-1"></a><span class="co">#| label: fig-ml</span></span>
+<span id="cb6-98"><a href="#cb6-98" aria-hidden="true" tabindex="-1"></a><span class="co">#| fig-height: 5</span></span>
+<span id="cb6-99"><a href="#cb6-99" aria-hidden="true" tabindex="-1"></a>cmp <span class="sc">|&gt;</span></span>
+<span id="cb6-100"><a href="#cb6-100" aria-hidden="true" tabindex="-1"></a>  <span class="fu">filter</span>(<span class="fu">is.finite</span>(est), truth <span class="sc">&gt;</span> <span class="dv">0</span>) <span class="sc">|&gt;</span></span>
+<span id="cb6-101"><a href="#cb6-101" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(<span class="at">ratio =</span> est <span class="sc">/</span> truth, <span class="at">type =</span> <span class="fu">factor</span>(type_lab[type], <span class="at">levels =</span> type_lab),</span>
+<span id="cb6-102"><a href="#cb6-102" aria-hidden="true" tabindex="-1"></a>         <span class="at">ml =</span> <span class="fu">str_detect</span>(config, <span class="st">"^mlReserve"</span>)) <span class="sc">|&gt;</span></span>
+<span id="cb6-103"><a href="#cb6-103" aria-hidden="true" tabindex="-1"></a>  <span class="fu">ggplot</span>(<span class="fu">aes</span>(ratio, <span class="fu">fct_rev</span>(config), <span class="at">fill =</span> ml)) <span class="sc">+</span></span>
+<span id="cb6-104"><a href="#cb6-104" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_vline</span>(<span class="at">xintercept =</span> <span class="dv">1</span>, <span class="at">colour =</span> <span class="st">"grey40"</span>) <span class="sc">+</span></span>
+<span id="cb6-105"><a href="#cb6-105" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_boxplot</span>(<span class="at">outlier.size =</span> <span class="fl">0.6</span>, <span class="at">linewidth =</span> <span class="fl">0.3</span>) <span class="sc">+</span></span>
+<span id="cb6-106"><a href="#cb6-106" aria-hidden="true" tabindex="-1"></a>  <span class="fu">facet_wrap</span>(<span class="sc">~</span>type, <span class="at">nrow =</span> <span class="dv">1</span>) <span class="sc">+</span></span>
+<span id="cb6-107"><a href="#cb6-107" aria-hidden="true" tabindex="-1"></a>  <span class="fu">scale_x_log10</span>(<span class="at">labels =</span> \(x) <span class="fu">paste0</span>(x, <span class="st">"x"</span>)) <span class="sc">+</span></span>
+<span id="cb6-108"><a href="#cb6-108" aria-hidden="true" tabindex="-1"></a>  <span class="fu">scale_fill_manual</span>(<span class="at">values =</span> <span class="fu">c</span>(<span class="st">`</span><span class="at">TRUE</span><span class="st">`</span> <span class="ot">=</span> <span class="st">"#E69F00"</span>, <span class="st">`</span><span class="at">FALSE</span><span class="st">`</span> <span class="ot">=</span> <span class="st">"#0072B2"</span>), <span class="at">guide =</span> <span class="st">"none"</span>) <span class="sc">+</span></span>
+<span id="cb6-109"><a href="#cb6-109" aria-hidden="true" tabindex="-1"></a>  <span class="fu">labs</span>(<span class="at">x =</span> <span class="st">"Estimate / truth (log scale; 1x = exact)"</span>, <span class="at">y =</span> <span class="cn">NULL</span>, <span class="at">title =</span> <span class="st">"mlReserve vs. classical methods on the same databases"</span>) <span class="sc">+</span></span>
+<span id="cb6-110"><a href="#cb6-110" aria-hidden="true" tabindex="-1"></a>  <span class="fu">theme_op</span>()</span>
+<span id="cb6-111"><a href="#cb6-111" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
+<span id="cb6-112"><a href="#cb6-112" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb6-113"><a href="#cb6-113" aria-hidden="true" tabindex="-1"></a>**How to read the plot** <span class="dt">&lt;</span><span class="kw">br</span><span class="dt">/&gt;</span></span>
+<span id="cb6-114"><a href="#cb6-114" aria-hidden="true" tabindex="-1"></a>Each box shows how far the estimate was from the truth across the simulated databases on a multiplicative scale: 1x is exact, 10x is ten times too high. Blue boxes are the standard methods and orange boxes are the machine-learning settings.</span>
+<span id="cb6-115"><a href="#cb6-115" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb6-116"><a href="#cb6-116" aria-hidden="true" tabindex="-1"></a>**What the plot tells you** <span class="dt">&lt;</span><span class="kw">br</span><span class="dt">/&gt;</span></span>
+<span id="cb6-117"><a href="#cb6-117" aria-hidden="true" tabindex="-1"></a>The orange boxes sit far to the right of the blue ones for trade and NAV errors, so the experimental method consistently overstates. For unauthorized trading all methods are widely scattered, so the plot gives no reason to prefer the machine-learning approach there either.</span>
+<span id="cb6-118"><a href="#cb6-118" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb6-121"><a href="#cb6-121" aria-hidden="true" tabindex="-1"></a><span class="in">```{r}</span></span>
+<span id="cb6-122"><a href="#cb6-122" aria-hidden="true" tabindex="-1"></a><span class="co">#| label: ml-text</span></span>
+<span id="cb6-123"><a href="#cb6-123" aria-hidden="true" tabindex="-1"></a>mlsc <span class="ot">&lt;-</span> sc_ml <span class="sc">|&gt;</span> <span class="fu">filter</span>(<span class="fu">str_detect</span>(config, <span class="st">"^mlReserve"</span>))</span>
+<span id="cb6-124"><a href="#cb6-124" aria-hidden="true" tabindex="-1"></a>closest <span class="ot">&lt;-</span> \(t) mlsc <span class="sc">|&gt;</span> <span class="fu">filter</span>(type <span class="sc">==</span> t) <span class="sc">|&gt;</span> <span class="fu">slice_min</span>(<span class="fu">abs</span>(<span class="fu">log</span>(median_ratio)), <span class="at">n =</span> <span class="dv">1</span>)</span>
+<span id="cb6-125"><a href="#cb6-125" aria-hidden="true" tabindex="-1"></a>worst <span class="ot">&lt;-</span> \(t) mlsc <span class="sc">|&gt;</span> <span class="fu">filter</span>(type <span class="sc">==</span> t) <span class="sc">|&gt;</span> <span class="fu">slice_max</span>(<span class="fu">abs</span>(<span class="fu">log</span>(median_ratio)), <span class="at">n =</span> <span class="dv">1</span>)</span>
+<span id="cb6-126"><a href="#cb6-126" aria-hidden="true" tabindex="-1"></a>mack <span class="ot">&lt;-</span> \(t) sc_ml <span class="sc">|&gt;</span> <span class="fu">filter</span>(type <span class="sc">==</span> t, config <span class="sc">==</span> <span class="st">"Mack (package)"</span>)</span>
+<span id="cb6-127"><a href="#cb6-127" aria-hidden="true" tabindex="-1"></a>nav_c <span class="ot">&lt;-</span> <span class="fu">closest</span>(<span class="st">"NAV errors"</span>); trade_c <span class="ot">&lt;-</span> <span class="fu">closest</span>(<span class="st">"Trade errors"</span>); un_c <span class="ot">&lt;-</span> <span class="fu">closest</span>(<span class="st">"Unauthorized trading"</span>)</span>
+<span id="cb6-128"><a href="#cb6-128" aria-hidden="true" tabindex="-1"></a>asinh_trade <span class="ot">&lt;-</span> sc_ml <span class="sc">|&gt;</span> <span class="fu">filter</span>(type <span class="sc">==</span> <span class="st">"Trade errors"</span>, config <span class="sc">==</span> <span class="st">"mlReserve: rf_asinh_numeric"</span>)</span>
+<span id="cb6-129"><a href="#cb6-129" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
+<span id="cb6-130"><a href="#cb6-130" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb6-131"><a href="#cb6-131" aria-hidden="true" tabindex="-1"></a><span class="fu">#### Reading the result</span></span>
+<span id="cb6-132"><a href="#cb6-132" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb6-133"><a href="#cb6-133" aria-hidden="true" tabindex="-1"></a><span class="ss">- </span>**Every `mlReserve` configuration overestimates on the two event types where classical methods work.** For NAV errors the closest configuration (<span class="in">`r nav_c$config`</span>) has a median estimate/truth ratio of <span class="in">`r round(nav_c$median_ratio, 1)`</span>, against <span class="in">`r round(mack("NAV errors")$median_ratio, 2)`</span> for Mack. For trade errors the closest (<span class="in">`r trade_c$config`</span>) is <span class="in">`r round(trade_c$median_ratio, 0)`</span>x the truth, against <span class="in">`r round(mack("Trade errors")$median_ratio, 2)`</span> for Mack.</span>
+<span id="cb6-134"><a href="#cb6-134" aria-hidden="true" tabindex="-1"></a><span class="ss">- </span>**Why:** on a single triangle, the learner extrapolates an upward trend across origin years into cells that, in this simulator, are nearly fully developed. With 10 origin years there are only 55 training cells and tree/kernel learners have no development-factor structure to anchor them.</span>
+<span id="cb6-135"><a href="#cb6-135" aria-hidden="true" tabindex="-1"></a><span class="ss">- </span>**The blog's `asinh` transform, applied to dollar values,** gives a median ratio of <span class="in">`r round(asinh_trade$median_ratio, 0)`</span> for trade errors, worse than the same learner with no transform in the cases we ran; it may be calibrated for much smaller numeric scales, and we did not test rescaling the data first.</span>
+<span id="cb6-136"><a href="#cb6-136" aria-hidden="true" tabindex="-1"></a><span class="ss">- </span>**Unauthorized trading:** the closest configuration (<span class="in">`r un_c$config`</span>, median ratio <span class="in">`r round(un_c$median_ratio, 1)`</span>) is not a useful comparison either way, since the truth is small and the estimates are highly dispersed.</span>
+<span id="cb6-137"><a href="#cb6-137" aria-hidden="true" tabindex="-1"></a><span class="ss">- </span>We report the configurations after the fact for transparency; none was selected using the truth, and "closest" above describes this experiment, not a recommendation.</span>
+<span id="cb6-138"><a href="#cb6-138" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb6-139"><a href="#cb6-139" aria-hidden="true" tabindex="-1"></a>Taken together, this is a limited test, on one data-generating process, with no tuning, of an unreleased fork. It gives no support for using <span class="in">`mlReserve`</span> here, and it does not show that the approach cannot work with more data or tuning.</span>
+</code></pre></div><button title="Copy to Clipboard" class="code-copy-button" data-in-quarto-modal=""><i class="bi"></i></button></div>
+</div></div></div></div></div>
 </div> <!-- /content -->
 <footer class="footer">
   <div class="nav-footer">
@@ -1896,8 +2080,41 @@ Figure&nbsp;1
     </div>
   </div>
 </footer>
+<script>var lightboxQuarto = GLightbox({"closeEffect":"zoom","descPosition":"bottom","loop":false,"openEffect":"zoom","selector":".lightbox"});
+(function() {
+  let previousOnload = window.onload;
+  window.onload = () => {
+    if (previousOnload) {
+      previousOnload();
+    }
+    lightboxQuarto.on('slide_before_load', (data) => {
+      const { slideIndex, slideNode, slideConfig, player, trigger } = data;
+      const href = trigger.getAttribute('href');
+      if (href !== null) {
+        const imgEl = window.document.querySelector(`a[href="${href}"] img`);
+        if (imgEl !== null) {
+          const srcAttr = imgEl.getAttribute("src");
+          if (srcAttr && srcAttr.startsWith("data:")) {
+            slideConfig.href = srcAttr;
+          }
+        }
+      } 
+    });
+  
+    lightboxQuarto.on('slide_after_load', (data) => {
+      const { slideIndex, slideNode, slideConfig, player, trigger } = data;
+      if (window.Quarto?.typesetMath) {
+        window.Quarto.typesetMath(slideNode);
+      }
+    });
+  
+  };
+  
+})();
+          </script>
 
 
 
 
+<script src="site_libs/quarto-html/zenscroll-min.js"></script>
 </body></html>

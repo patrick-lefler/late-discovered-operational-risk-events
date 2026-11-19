@@ -74,7 +74,10 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <link href="site_libs/quarto-html/quarto-syntax-highlighting-587c61ba64f3a5504c4d52d930310e48.css" rel="stylesheet" id="quarto-text-highlighting-styles">
 <script src="site_libs/bootstrap/bootstrap.min.js"></script>
 <link href="site_libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
-<link href="site_libs/bootstrap/bootstrap-14fc7787e48927cca1cfdea7cd9d3ef6.min.css" rel="stylesheet" append-hash="true" id="quarto-bootstrap" data-mode="light">
+<link href="site_libs/bootstrap/bootstrap-315aa354fbfbfd45b4b76e88c3271fce.min.css" rel="stylesheet" append-hash="true" id="quarto-bootstrap" data-mode="light">
+<script src="site_libs/quarto-contrib/glightbox/glightbox.min.js"></script>
+<link href="site_libs/quarto-contrib/glightbox/glightbox.min.css" rel="stylesheet">
+<link href="site_libs/quarto-contrib/glightbox/lightbox.css" rel="stylesheet">
 <script id="quarto-search-options" type="application/json">{
   "language": {
     "search-no-results-text": "No results",
@@ -90,6 +93,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
     "search-label": "Search"
   }
 }</script>
+<style>html{ scroll-behavior: smooth; }</style>
 
   <script src="https://cdnjs.cloudflare.com/polyfill/v3/polyfill.min.js?features=es6"></script>
   <script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml-full.js" type="text/javascript"></script>
@@ -139,7 +143,7 @@ window.Quarto = {
   </nav>
 </header>
 <!-- content -->
-<div id="quarto-content" class="quarto-container page-columns page-rows-contents page-layout-article">
+<div id="quarto-content" class="quarto-container page-columns page-rows-contents page-layout-full">
 <!-- sidebar -->
   <nav id="quarto-sidebar" class="sidebar collapse collapse-horizontal quarto-sidebar-collapse-item sidebar-navigation floating overflow-auto">
     <div class="pt-lg-2 mt-2 text-left sidebar-header">
@@ -177,7 +181,7 @@ window.Quarto = {
         <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="./reproducibility.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text">Reproducibility &amp; Limitations</span></a>
+ <span class="menu-text">Reproducibility</span></a>
   </div>
 </li>
         <li class="sidebar-item">
@@ -193,7 +197,7 @@ window.Quarto = {
 <!-- margin-sidebar -->
     <div id="quarto-margin-sidebar" class="sidebar margin-sidebar">
         <nav id="TOC" role="doc-toc" class="toc-active">
-    <h2 id="toc-title">On this page</h2>
+    <h2 id="toc-title">contents</h2>
    
   <ul>
   <li><a href="#generator-design" id="toc-generator-design" class="nav-link active" data-scroll-target="#generator-design">Generator design</a></li>
@@ -205,17 +209,17 @@ window.Quarto = {
 </nav>
     </div>
 <!-- main -->
-<main class="content" id="quarto-document-content">
+<main class="content column-body" id="quarto-document-content">
 
 <header id="title-block-header" class="quarto-title-block default">
 <div class="quarto-title">
-<h1 class="title">Synthetic Data</h1>
+<div class="quarto-title-block"><div><h1 class="title">Synthetic Data</h1><button type="button" class="btn code-tools-button dropdown-toggle" id="quarto-code-tools-menu" data-bs-toggle="dropdown" aria-expanded="false"><i class="bi"></i> Code</button><ul class="dropdown-menu dropdown-menu-end" aria-labelelledby="quarto-code-tools-menu"><li><a id="quarto-show-all-code" class="dropdown-item" href="javascript:void(0)" role="button">Show All Code</a></li><li><a id="quarto-hide-all-code" class="dropdown-item" href="javascript:void(0)" role="button">Hide All Code</a></li><li><hr class="dropdown-divider"></li><li><a id="quarto-view-source" class="dropdown-item" href="javascript:void(0)" role="button">View Source</a></li></ul></div></div>
 <p class="subtitle lead">A simulated loss database with a known ground truth</p>
 </div>
 
 
 
-<div class="quarto-title-meta">
+<div class="quarto-title-meta column-body">
 
     
   
@@ -805,7 +809,7 @@ Table&nbsp;1
 <div id="fig-lags" class="quarto-float quarto-figure quarto-figure-center anchored">
 <figure class="quarto-float quarto-float-fig figure">
 <div aria-describedby="fig-lags-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
-<img src="data_files/figure-html/fig-lags-1.png" class="img-fluid figure-img" width="672">
+<a href="data_files/figure-html/fig-lags-1.png" class="lightbox" data-gallery="quarto-lightbox-gallery-1" title="Figure&nbsp;1: Simulated share of events by discovery lag, per event type (200,000 draws each)."><img src="data_files/figure-html/fig-lags-1.png" class="img-fluid figure-img" width="672"></a>
 </div>
 <figcaption class="quarto-float-caption-bottom quarto-float-caption quarto-float-fig" id="fig-lags-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
 Figure&nbsp;1: Simulated share of events by discovery lag, per event type (200,000 draws each).
@@ -1394,6 +1398,8 @@ Table&nbsp;2
 <p>The two example <strong>controls</strong> on the <a href="./controls.html">Control Value</a> page work differently from the control-improvement scenario above. They shift the lag-distribution parameters (additively, for the event types listed in <code>params.yaml</code>) for the whole simulated history before severities are drawn, so a faster-detected event is also smaller through the <span class="math inline">\((1 + e \times \text{lag})\)</span> term.</p>
 
 
+<!-- -->
+
 </section>
 
 </main> <!-- /main -->
@@ -1467,6 +1473,57 @@ Table&nbsp;2
         container: window.document.getElementById('quarto-embedded-source-code-modal')
       });
       clipboardModal.on('success', onCopySuccess);
+    }
+    const viewSource = window.document.getElementById('quarto-view-source') ||
+                       window.document.getElementById('quarto-code-tools-source');
+    if (viewSource) {
+      const sourceUrl = viewSource.getAttribute("data-quarto-source-url");
+      viewSource.addEventListener("click", function(e) {
+        if (sourceUrl) {
+          // rstudio viewer pane
+          if (/\bcapabilities=\b/.test(window.location)) {
+            window.open(sourceUrl);
+          } else {
+            window.location.href = sourceUrl;
+          }
+        } else {
+          const modal = new bootstrap.Modal(document.getElementById('quarto-embedded-source-code-modal'));
+          modal.show();
+        }
+        return false;
+      });
+    }
+    function toggleCodeHandler(show) {
+      return function(e) {
+        const detailsSrc = window.document.querySelectorAll(".cell > details > .sourceCode");
+        for (let i=0; i<detailsSrc.length; i++) {
+          const details = detailsSrc[i].parentElement;
+          if (show) {
+            details.open = true;
+          } else {
+            details.removeAttribute("open");
+          }
+        }
+        const cellCodeDivs = window.document.querySelectorAll(".cell > .sourceCode");
+        const fromCls = show ? "hidden" : "unhidden";
+        const toCls = show ? "unhidden" : "hidden";
+        for (let i=0; i<cellCodeDivs.length; i++) {
+          const codeDiv = cellCodeDivs[i];
+          if (codeDiv.classList.contains(fromCls)) {
+            codeDiv.classList.remove(fromCls);
+            codeDiv.classList.add(toCls);
+          } 
+        }
+        return false;
+      }
+    }
+    const hideAllCode = window.document.getElementById("quarto-hide-all-code");
+    if (hideAllCode) {
+      hideAllCode.addEventListener("click", toggleCodeHandler(false));
+    }
+    const showAllCode = window.document.getElementById("quarto-show-all-code");
+    if (showAllCode) {
+      showAllCode.addEventListener("click", toggleCodeHandler(true));
     }
       var localhostRegex = new RegExp(/^(?:http|https):\/\/localhost\:?[0-9]*\//);
       var mailtoRegex = new RegExp(/^mailto:/);
@@ -1797,7 +1854,7 @@ Table&nbsp;2
     }
   });
   </script>
-<nav class="page-navigation">
+<nav class="page-navigation column-body">
   <div class="nav-page nav-page-previous">
       <a href="./index.html" class="pagination-link" aria-label="Overview">
         <i class="bi bi-arrow-left-short"></i> <span class="nav-page-text">Overview</span>
@@ -1808,7 +1865,152 @@ Table&nbsp;2
         <span class="nav-page-text">Results</span> <i class="bi bi-arrow-right-short"></i>
       </a>
   </div>
-</nav>
+</nav><div class="modal fade" id="quarto-embedded-source-code-modal" tabindex="-1" aria-labelledby="quarto-embedded-source-code-modal-label" aria-hidden="true"><div class="modal-dialog modal-dialog-scrollable"><div class="modal-content"><div class="modal-header"><h5 class="modal-title" id="quarto-embedded-source-code-modal-label">Source Code</h5><button class="btn-close" data-bs-dismiss="modal"></button></div><div class="modal-body"><div class="">
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb4" data-shortcodes="false"><pre class="sourceCode markdown code-with-copy"><code class="sourceCode markdown"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a><span class="co">---</span></span>
+<span id="cb4-2"><a href="#cb4-2" aria-hidden="true" tabindex="-1"></a><span class="an">title:</span><span class="co"> "Synthetic Data"</span></span>
+<span id="cb4-3"><a href="#cb4-3" aria-hidden="true" tabindex="-1"></a><span class="an">subtitle:</span><span class="co"> "A simulated loss database with a known ground truth"</span></span>
+<span id="cb4-4"><a href="#cb4-4" aria-hidden="true" tabindex="-1"></a><span class="co">---</span></span>
+<span id="cb4-5"><a href="#cb4-5" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb4-8"><a href="#cb4-8" aria-hidden="true" tabindex="-1"></a><span class="in">```{r}</span></span>
+<span id="cb4-9"><a href="#cb4-9" aria-hidden="true" tabindex="-1"></a><span class="co">#| label: setup</span></span>
+<span id="cb4-10"><a href="#cb4-10" aria-hidden="true" tabindex="-1"></a><span class="co">#| include: false</span></span>
+<span id="cb4-11"><a href="#cb4-11" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(tidyverse)</span>
+<span id="cb4-12"><a href="#cb4-12" aria-hidden="true" tabindex="-1"></a><span class="cf">for</span> (f <span class="cf">in</span> <span class="fu">list.files</span>(<span class="st">"R"</span>, <span class="at">full.names =</span> <span class="cn">TRUE</span>)) <span class="fu">source</span>(f)</span>
+<span id="cb4-13"><a href="#cb4-13" aria-hidden="true" tabindex="-1"></a>params <span class="ot">&lt;-</span> <span class="fu">load_params</span>()</span>
+<span id="cb4-14"><a href="#cb4-14" aria-hidden="true" tabindex="-1"></a>res <span class="ot">&lt;-</span> <span class="fu">load_results</span>()</span>
+<span id="cb4-15"><a href="#cb4-15" aria-hidden="true" tabindex="-1"></a>base <span class="ot">&lt;-</span> <span class="fu">apply_scenario</span>(params, <span class="st">"baseline"</span>)</span>
+<span id="cb4-16"><a href="#cb4-16" aria-hidden="true" tabindex="-1"></a>aum <span class="ot">&lt;-</span> params<span class="sc">$</span>firm<span class="sc">$</span>aum_usd</span>
+<span id="cb4-17"><a href="#cb4-17" aria-hidden="true" tabindex="-1"></a>types <span class="ot">&lt;-</span> <span class="fu">names</span>(params<span class="sc">$</span>event_types)</span>
+<span id="cb4-18"><a href="#cb4-18" aria-hidden="true" tabindex="-1"></a><span class="fu">set.seed</span>(<span class="dv">1</span>)</span>
+<span id="cb4-19"><a href="#cb4-19" aria-hidden="true" tabindex="-1"></a>lags <span class="ot">&lt;-</span> <span class="fu">map</span>(types, \(t) <span class="fu">tibble</span>(<span class="at">type =</span> type_lab[t], <span class="at">lag =</span> <span class="fu">draw_lag</span>(<span class="fl">2e5</span>, params<span class="sc">$</span>event_types[[t]]<span class="sc">$</span>lag))) <span class="sc">|&gt;</span> <span class="fu">list_rbind</span>()</span>
+<span id="cb4-20"><a href="#cb4-20" aria-hidden="true" tabindex="-1"></a>lag_stats <span class="ot">&lt;-</span> lags <span class="sc">|&gt;</span> <span class="fu">summarise</span>(<span class="at">median =</span> <span class="fu">median</span>(lag), <span class="at">p90 =</span> <span class="fu">quantile</span>(lag, .<span class="dv">9</span>), <span class="at">beyond_window =</span> <span class="fu">mean</span>(lag <span class="sc">&gt;=</span> params<span class="sc">$</span>horizon<span class="sc">$</span>n_lag), <span class="at">.by =</span> type)</span>
+<span id="cb4-21"><a href="#cb4-21" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
+<span id="cb4-22"><a href="#cb4-22" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb4-23"><a href="#cb4-23" aria-hidden="true" tabindex="-1"></a>All data are simulated. No internal or client loss data are used, and every parameter is an **assumption** chosen for plausibility, stored in <span class="in">`params.yaml`</span>. The point is to have a known ground truth against which estimation methods can be scored, not to describe a real firm.</span>
+<span id="cb4-24"><a href="#cb4-24" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb4-25"><a href="#cb4-25" aria-hidden="true" tabindex="-1"></a><span class="fu">## Generator design</span></span>
+<span id="cb4-26"><a href="#cb4-26" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb4-27"><a href="#cb4-27" aria-hidden="true" tabindex="-1"></a>For each event type and origin quarter:</span>
+<span id="cb4-28"><a href="#cb4-28" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb4-29"><a href="#cb4-29" aria-hidden="true" tabindex="-1"></a><span class="ss">1. </span>**Count** ~ Poisson($\lambda \times \text{exposure}$), where exposure grows <span class="in">`r fmt_pct(params$exposure$growth_per_quarter, 1)`</span> per quarter. Counts are independent across quarters and event types, with no overdispersion or clustering (see <span class="co">[</span><span class="ot">Limitations</span><span class="co">](reproducibility.qmd#sec-limitations)</span>).</span>
+<span id="cb4-30"><a href="#cb4-30" aria-hidden="true" tabindex="-1"></a><span class="ss">2. </span>**Discovery lag** (quarters): a mixture of a fast component (geometric) and a slow component (discretised lognormal).</span>
+<span id="cb4-31"><a href="#cb4-31" aria-hidden="true" tabindex="-1"></a><span class="ss">3. </span>**Severity**: lognormal body spliced to a generalised Pareto tail, then scaled by $(1 + e \times \text{lag})$, so events found later are larger. The uplift is **linear** in the lag (not compounding). It is a crude stand-in for an unauthorized position that keeps growing while hidden; $e$ is the only mechanism by which a loss can change while undiscovered, so every dollar figure for controls on the <span class="co">[</span><span class="ot">Control Value</span><span class="co">](controls.qmd)</span> page scales with it.</span>
+<span id="cb4-32"><a href="#cb4-32" aria-hidden="true" tabindex="-1"></a><span class="ss">4. </span>The loss is **recorded in full at the discovery date**.</span>
+<span id="cb4-33"><a href="#cb4-33" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb4-34"><a href="#cb4-34" aria-hidden="true" tabindex="-1"></a>The generator keeps the full square, so the true undiscovered loss is always known.</span>
+<span id="cb4-35"><a href="#cb4-35" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb4-36"><a href="#cb4-36" aria-hidden="true" tabindex="-1"></a><span class="fu">## Parameters</span></span>
+<span id="cb4-37"><a href="#cb4-37" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb4-40"><a href="#cb4-40" aria-hidden="true" tabindex="-1"></a><span class="in">```{r}</span></span>
+<span id="cb4-41"><a href="#cb4-41" aria-hidden="true" tabindex="-1"></a><span class="co">#| label: tbl-params</span></span>
+<span id="cb4-42"><a href="#cb4-42" aria-hidden="true" tabindex="-1"></a><span class="fu">tibble</span>(</span>
+<span id="cb4-43"><a href="#cb4-43" aria-hidden="true" tabindex="-1"></a>  <span class="st">`</span><span class="at">Event type</span><span class="st">`</span> <span class="ot">=</span> type_lab[types],</span>
+<span id="cb4-44"><a href="#cb4-44" aria-hidden="true" tabindex="-1"></a>  <span class="st">`</span><span class="at">Events / qtr</span><span class="st">`</span> <span class="ot">=</span> <span class="fu">map_dbl</span>(params<span class="sc">$</span>event_types, <span class="st">"lambda"</span>),</span>
+<span id="cb4-45"><a href="#cb4-45" aria-hidden="true" tabindex="-1"></a>  <span class="st">`</span><span class="at">Fast-lag weight</span><span class="st">`</span> <span class="ot">=</span> <span class="fu">map_dbl</span>(params<span class="sc">$</span>event_types, \(x) x<span class="sc">$</span>lag<span class="sc">$</span>w_fast),</span>
+<span id="cb4-46"><a href="#cb4-46" aria-hidden="true" tabindex="-1"></a>  <span class="st">`</span><span class="at">Slow-lag median (qtrs)</span><span class="st">`</span> <span class="ot">=</span> <span class="fu">map_dbl</span>(params<span class="sc">$</span>event_types, \(x) <span class="fu">exp</span>(x<span class="sc">$</span>lag<span class="sc">$</span>slow_meanlog)),</span>
+<span id="cb4-47"><a href="#cb4-47" aria-hidden="true" tabindex="-1"></a>  <span class="st">`</span><span class="at">Median lag (qtrs)</span><span class="st">`</span> <span class="ot">=</span> lag_stats<span class="sc">$</span>median[<span class="fu">match</span>(type_lab[types], lag_stats<span class="sc">$</span>type)],</span>
+<span id="cb4-48"><a href="#cb4-48" aria-hidden="true" tabindex="-1"></a>  <span class="st">`</span><span class="at">90th-pct lag (qtrs)</span><span class="st">`</span> <span class="ot">=</span> lag_stats<span class="sc">$</span>p90[<span class="fu">match</span>(type_lab[types], lag_stats<span class="sc">$</span>type)],</span>
+<span id="cb4-49"><a href="#cb4-49" aria-hidden="true" tabindex="-1"></a>  <span class="st">`</span><span class="at">Median severity</span><span class="st">`</span> <span class="ot">=</span> <span class="fu">map_dbl</span>(params<span class="sc">$</span>event_types, \(x) <span class="fu">exp</span>(x<span class="sc">$</span>severity<span class="sc">$</span>meanlog)),</span>
+<span id="cb4-50"><a href="#cb4-50" aria-hidden="true" tabindex="-1"></a>  <span class="st">`</span><span class="at">Tail prob.</span><span class="st">`</span> <span class="ot">=</span> <span class="fu">map_dbl</span>(params<span class="sc">$</span>event_types, \(x) x<span class="sc">$</span>severity<span class="sc">$</span>p_tail),</span>
+<span id="cb4-51"><a href="#cb4-51" aria-hidden="true" tabindex="-1"></a>  <span class="st">`</span><span class="at">Severity uplift per lag qtr (linear, e)</span><span class="st">`</span> <span class="ot">=</span> <span class="fu">map_dbl</span>(params<span class="sc">$</span>event_types, \(x) x<span class="sc">$</span>severity<span class="sc">$</span>lag_elasticity)</span>
+<span id="cb4-52"><a href="#cb4-52" aria-hidden="true" tabindex="-1"></a>) <span class="sc">|&gt;</span></span>
+<span id="cb4-53"><a href="#cb4-53" aria-hidden="true" tabindex="-1"></a>  gt<span class="sc">::</span><span class="fu">gt</span>() <span class="sc">|&gt;</span></span>
+<span id="cb4-54"><a href="#cb4-54" aria-hidden="true" tabindex="-1"></a>  gt<span class="sc">::</span><span class="fu">fmt_currency</span>(<span class="st">`</span><span class="at">Median severity</span><span class="st">`</span>, <span class="at">decimals =</span> <span class="dv">0</span>) <span class="sc">|&gt;</span></span>
+<span id="cb4-55"><a href="#cb4-55" aria-hidden="true" tabindex="-1"></a>  gt<span class="sc">::</span><span class="fu">fmt_number</span>(<span class="fu">c</span>(<span class="st">`</span><span class="at">Events / qtr</span><span class="st">`</span>, <span class="st">`</span><span class="at">Slow-lag median (qtrs)</span><span class="st">`</span>), <span class="at">decimals =</span> <span class="dv">1</span>) <span class="sc">|&gt;</span></span>
+<span id="cb4-56"><a href="#cb4-56" aria-hidden="true" tabindex="-1"></a>  gt<span class="sc">::</span><span class="fu">fmt_number</span>(<span class="fu">c</span>(<span class="st">`</span><span class="at">Fast-lag weight</span><span class="st">`</span>, <span class="st">`</span><span class="at">Tail prob.</span><span class="st">`</span>, <span class="st">`</span><span class="at">Severity uplift per lag qtr (linear, e)</span><span class="st">`</span>), <span class="at">decimals =</span> <span class="dv">2</span>) <span class="sc">|&gt;</span></span>
+<span id="cb4-57"><a href="#cb4-57" aria-hidden="true" tabindex="-1"></a>  gt<span class="sc">::</span><span class="fu">tab_source_note</span>(<span class="st">"All values are judgement-based assumptions (status: assumption in params.yaml), with no calibration to public loss data. Total expected loss is checked against a 10-15 bps of AUM target in the sanity check below; plausible ranges are given beside each value in params.yaml."</span>)</span>
+<span id="cb4-58"><a href="#cb4-58" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
+<span id="cb4-59"><a href="#cb4-59" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb4-60"><a href="#cb4-60" aria-hidden="true" tabindex="-1"></a>**How to read the table** <span class="dt">&lt;</span><span class="kw">br</span><span class="dt">/&gt;</span></span>
+<span id="cb4-61"><a href="#cb4-61" aria-hidden="true" tabindex="-1"></a>Each row is an event type. The columns show how often events occur, how many quarters they typically take to be found (median and 90th percentile), how large they are, and how much their size grows for each quarter they stay hidden.</span>
+<span id="cb4-62"><a href="#cb4-62" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb4-63"><a href="#cb4-63" aria-hidden="true" tabindex="-1"></a>**What the table tells you** <span class="dt">&lt;</span><span class="kw">br</span><span class="dt">/&gt;</span></span>
+<span id="cb4-64"><a href="#cb4-64" aria-hidden="true" tabindex="-1"></a>The three event types are very different risks. Trade errors are frequent (about <span class="in">`r sprintf("%.0f", params$event_types$trade_error$lambda)`</span> a quarter) and small, and are found at once, while unauthorized trading is rare (about one event a year) but large, takes a median of <span class="in">`r lag_stats$median[lag_stats$type == "Unauthorized trading"]`</span> quarters to find, and grows the most while hidden.</span>
+<span id="cb4-65"><a href="#cb4-65" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb4-66"><a href="#cb4-66" aria-hidden="true" tabindex="-1"></a><span class="fu">## Discovery-Lag Distributions</span></span>
+<span id="cb4-67"><a href="#cb4-67" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb4-70"><a href="#cb4-70" aria-hidden="true" tabindex="-1"></a><span class="in">```{r}</span></span>
+<span id="cb4-71"><a href="#cb4-71" aria-hidden="true" tabindex="-1"></a><span class="co">#| label: fig-lags</span></span>
+<span id="cb4-72"><a href="#cb4-72" aria-hidden="true" tabindex="-1"></a><span class="co">#| fig-cap: "Simulated share of events by discovery lag, per event type (200,000 draws each)."</span></span>
+<span id="cb4-73"><a href="#cb4-73" aria-hidden="true" tabindex="-1"></a><span class="co">#| fig-height: 3.6</span></span>
+<span id="cb4-74"><a href="#cb4-74" aria-hidden="true" tabindex="-1"></a>lags <span class="sc">|&gt;</span></span>
+<span id="cb4-75"><a href="#cb4-75" aria-hidden="true" tabindex="-1"></a>  <span class="fu">filter</span>(lag <span class="sc">&lt;=</span> <span class="dv">24</span>) <span class="sc">|&gt;</span></span>
+<span id="cb4-76"><a href="#cb4-76" aria-hidden="true" tabindex="-1"></a>  <span class="fu">count</span>(type, lag) <span class="sc">|&gt;</span></span>
+<span id="cb4-77"><a href="#cb4-77" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(<span class="at">share =</span> n <span class="sc">/</span> <span class="fl">2e5</span>, <span class="at">.by =</span> type) <span class="sc">|&gt;</span></span>
+<span id="cb4-78"><a href="#cb4-78" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(<span class="at">type =</span> <span class="fu">factor</span>(type, <span class="at">levels =</span> type_lab)) <span class="sc">|&gt;</span></span>
+<span id="cb4-79"><a href="#cb4-79" aria-hidden="true" tabindex="-1"></a>  <span class="fu">ggplot</span>(<span class="fu">aes</span>(lag, share, <span class="at">fill =</span> type)) <span class="sc">+</span></span>
+<span id="cb4-80"><a href="#cb4-80" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_col</span>(<span class="at">width =</span> <span class="fl">0.85</span>) <span class="sc">+</span></span>
+<span id="cb4-81"><a href="#cb4-81" aria-hidden="true" tabindex="-1"></a>  <span class="fu">facet_wrap</span>(<span class="sc">~</span>type, <span class="at">nrow =</span> <span class="dv">1</span>) <span class="sc">+</span></span>
+<span id="cb4-82"><a href="#cb4-82" aria-hidden="true" tabindex="-1"></a>  <span class="fu">scale_fill_manual</span>(<span class="at">values =</span> type_col, <span class="at">guide =</span> <span class="st">"none"</span>) <span class="sc">+</span></span>
+<span id="cb4-83"><a href="#cb4-83" aria-hidden="true" tabindex="-1"></a>  <span class="fu">scale_y_continuous</span>(<span class="at">labels =</span> scales<span class="sc">::</span><span class="fu">label_percent</span>()) <span class="sc">+</span></span>
+<span id="cb4-84"><a href="#cb4-84" aria-hidden="true" tabindex="-1"></a>  <span class="fu">labs</span>(<span class="at">x =</span> <span class="st">"Discovery lag (quarters, truncated at 24)"</span>, <span class="at">y =</span> <span class="st">"Share of events"</span>, <span class="at">title =</span> <span class="st">"Detection speed differs sharply by event type"</span>) <span class="sc">+</span></span>
+<span id="cb4-85"><a href="#cb4-85" aria-hidden="true" tabindex="-1"></a>  <span class="fu">theme_op</span>()</span>
+<span id="cb4-86"><a href="#cb4-86" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
+<span id="cb4-87"><a href="#cb4-87" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb4-88"><a href="#cb4-88" aria-hidden="true" tabindex="-1"></a>**How to read the plot** <span class="dt">&lt;</span><span class="kw">br</span><span class="dt">/&gt;</span></span>
+<span id="cb4-89"><a href="#cb4-89" aria-hidden="true" tabindex="-1"></a>Each bar shows the share of events found a given number of quarters after they happened, so bars clustered at the left mean fast detection and a long spread to the right means slow detection.</span>
+<span id="cb4-90"><a href="#cb4-90" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb4-91"><a href="#cb4-91" aria-hidden="true" tabindex="-1"></a>**What the plot tells you** <span class="dt">&lt;</span><span class="kw">br</span><span class="dt">/&gt;</span></span>
+<span id="cb4-92"><a href="#cb4-92" aria-hidden="true" tabindex="-1"></a>Detection speed differs sharply by event type. The median number of quarters to discovery is <span class="in">`{r} paste(lag_stats$type, lag_stats$median, sep = ": ", collapse = ", ")`</span>, so trade errors are found almost at once while unauthorized trading often runs for years. The share of events discovered after the 40-quarter window is <span class="in">`{r} paste0(lag_stats$type, " ", fmt_pct(lag_stats$beyond_window, 1), collapse = ", ")`</span>, so few events fall outside the window, but for unauthorized trading they matter. <span class="dt">&lt;</span><span class="kw">br</span><span class="dt">/&gt;</span></span>
+<span id="cb4-93"><a href="#cb4-93" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb4-94"><a href="#cb4-94" aria-hidden="true" tabindex="-1"></a>Loss grows while an event stays hidden, up to <span class="in">`{r} sprintf("%.1f", 1 + params$event_types$unauthorized_trading$severity$lag_elasticity * params$horizon$n_lag)`</span> times the initial size, and the measure here counts only loss that is still undiscovered. So the <span class="in">`{r} fmt_pct(lag_stats$beyond_window[lag_stats$type == "Unauthorized trading"], 1)`</span> of unauthorized-trading events beyond the window carry about <span class="in">`{r} fmt_pct(tail_share(res$reps, "unauthorized_trading"))`</span> of the true undiscovered unauthorized-trading loss at the evaluation date (baseline, annual granularity, <span class="in">`{r} res$meta$n_reps`</span> databases). <span class="dt">&lt;</span><span class="kw">br</span><span class="dt">/&gt;</span></span>
+<span id="cb4-95"><a href="#cb4-95" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb4-96"><a href="#cb4-96" aria-hidden="true" tabindex="-1"></a>This is why a standard method that looks only inside the 10-year history misses so much of that line.</span>
+<span id="cb4-97"><a href="#cb4-97" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb4-98"><a href="#cb4-98" aria-hidden="true" tabindex="-1"></a><span class="fu">## Sanity check: size of the losses</span></span>
+<span id="cb4-99"><a href="#cb4-99" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb4-100"><a href="#cb4-100" aria-hidden="true" tabindex="-1"></a>An uncalibrated simulator can easily produce implausible losses, so we check the scale against an assumed AUM of <span class="in">`r fmt_usd(aum)`</span>. Expected annual incurred loss (all events, discovered or not) over 200 simulated databases:</span>
+<span id="cb4-101"><a href="#cb4-101" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb4-104"><a href="#cb4-104" aria-hidden="true" tabindex="-1"></a><span class="in">```{r}</span></span>
+<span id="cb4-105"><a href="#cb4-105" aria-hidden="true" tabindex="-1"></a><span class="co">#| label: tbl-scale</span></span>
+<span id="cb4-106"><a href="#cb4-106" aria-hidden="true" tabindex="-1"></a>sims <span class="ot">&lt;-</span> parallel<span class="sc">::</span><span class="fu">mclapply</span>(<span class="dv">1</span><span class="sc">:</span><span class="dv">200</span>, \(r) {</span>
+<span id="cb4-107"><a href="#cb4-107" aria-hidden="true" tabindex="-1"></a>  <span class="fu">simulate_database</span>(base, <span class="at">rep =</span> r) <span class="sc">|&gt;</span></span>
+<span id="cb4-108"><a href="#cb4-108" aria-hidden="true" tabindex="-1"></a>    <span class="fu">mutate</span>(<span class="at">year =</span> <span class="fu">ceiling</span>(origin <span class="sc">/</span> <span class="dv">4</span>)) <span class="sc">|&gt;</span></span>
+<span id="cb4-109"><a href="#cb4-109" aria-hidden="true" tabindex="-1"></a>    <span class="fu">summarise</span>(<span class="at">inc =</span> <span class="fu">sum</span>(severity), <span class="at">n =</span> <span class="fu">n</span>(), <span class="at">.by =</span> <span class="fu">c</span>(type, year))</span>
+<span id="cb4-110"><a href="#cb4-110" aria-hidden="true" tabindex="-1"></a>}, <span class="at">mc.cores =</span> <span class="fu">max</span>(<span class="dv">1</span>L, parallel<span class="sc">::</span><span class="fu">detectCores</span>() <span class="sc">-</span> <span class="dv">2</span>L)) <span class="sc">|&gt;</span></span>
+<span id="cb4-111"><a href="#cb4-111" aria-hidden="true" tabindex="-1"></a>  <span class="fu">bind_rows</span>(<span class="at">.id =</span> <span class="st">"rep"</span>)</span>
+<span id="cb4-112"><a href="#cb4-112" aria-hidden="true" tabindex="-1"></a>n_years <span class="ot">&lt;-</span> params<span class="sc">$</span>horizon<span class="sc">$</span>n_origin <span class="sc">/</span> <span class="dv">4</span></span>
+<span id="cb4-113"><a href="#cb4-113" aria-hidden="true" tabindex="-1"></a>by_type <span class="ot">&lt;-</span> sims <span class="sc">|&gt;</span></span>
+<span id="cb4-114"><a href="#cb4-114" aria-hidden="true" tabindex="-1"></a>  <span class="fu">summarise</span>(<span class="st">`</span><span class="at">Mean loss / yr</span><span class="st">`</span> <span class="ot">=</span> <span class="fu">sum</span>(inc) <span class="sc">/</span> (<span class="fu">n_distinct</span>(rep) <span class="sc">*</span> n_years), <span class="st">`</span><span class="at">Events / yr</span><span class="st">`</span> <span class="ot">=</span> <span class="fu">sum</span>(n) <span class="sc">/</span> (<span class="fu">n_distinct</span>(rep) <span class="sc">*</span> n_years), <span class="at">.by =</span> type) <span class="sc">|&gt;</span></span>
+<span id="cb4-115"><a href="#cb4-115" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(<span class="at">Type =</span> type_lab[type], <span class="st">`</span><span class="at">bps of AUM</span><span class="st">`</span> <span class="ot">=</span> <span class="st">`</span><span class="at">Mean loss / yr</span><span class="st">`</span> <span class="sc">/</span> aum <span class="sc">*</span> <span class="fl">1e4</span>)</span>
+<span id="cb4-116"><a href="#cb4-116" aria-hidden="true" tabindex="-1"></a><span class="co"># Single-year totals (all types), pooled over databases and origin years: the same basis as VaR on the Control Value page.</span></span>
+<span id="cb4-117"><a href="#cb4-117" aria-hidden="true" tabindex="-1"></a>year_totals <span class="ot">&lt;-</span> sims <span class="sc">|&gt;</span> <span class="fu">summarise</span>(<span class="at">inc =</span> <span class="fu">sum</span>(inc), <span class="at">.by =</span> <span class="fu">c</span>(rep, year))</span>
+<span id="cb4-118"><a href="#cb4-118" aria-hidden="true" tabindex="-1"></a><span class="fu">bind_rows</span>(</span>
+<span id="cb4-119"><a href="#cb4-119" aria-hidden="true" tabindex="-1"></a>  by_type <span class="sc">|&gt;</span> <span class="fu">select</span>(Type, <span class="st">`</span><span class="at">Events / yr</span><span class="st">`</span>, <span class="st">`</span><span class="at">Mean loss / yr</span><span class="st">`</span>, <span class="st">`</span><span class="at">bps of AUM</span><span class="st">`</span>),</span>
+<span id="cb4-120"><a href="#cb4-120" aria-hidden="true" tabindex="-1"></a>  <span class="fu">tibble</span>(<span class="at">Type =</span> <span class="st">"All types"</span>, <span class="st">`</span><span class="at">Events / yr</span><span class="st">`</span> <span class="ot">=</span> <span class="fu">sum</span>(by_type<span class="sc">$</span><span class="st">`</span><span class="at">Events / yr</span><span class="st">`</span>), <span class="st">`</span><span class="at">Mean loss / yr</span><span class="st">`</span> <span class="ot">=</span> <span class="fu">mean</span>(year_totals<span class="sc">$</span>inc), <span class="st">`</span><span class="at">bps of AUM</span><span class="st">`</span> <span class="ot">=</span> <span class="fu">mean</span>(year_totals<span class="sc">$</span>inc) <span class="sc">/</span> aum <span class="sc">*</span> <span class="fl">1e4</span>)</span>
+<span id="cb4-121"><a href="#cb4-121" aria-hidden="true" tabindex="-1"></a>) <span class="sc">|&gt;</span></span>
+<span id="cb4-122"><a href="#cb4-122" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(<span class="at">Type =</span> <span class="fu">factor</span>(Type, <span class="at">levels =</span> <span class="fu">c</span>(type_lab, <span class="st">"All types"</span>))) <span class="sc">|&gt;</span></span>
+<span id="cb4-123"><a href="#cb4-123" aria-hidden="true" tabindex="-1"></a>  <span class="fu">arrange</span>(Type) <span class="sc">|&gt;</span></span>
+<span id="cb4-124"><a href="#cb4-124" aria-hidden="true" tabindex="-1"></a>  gt<span class="sc">::</span><span class="fu">gt</span>() <span class="sc">|&gt;</span></span>
+<span id="cb4-125"><a href="#cb4-125" aria-hidden="true" tabindex="-1"></a>  gt<span class="sc">::</span><span class="fu">fmt_number</span>(<span class="fu">c</span>(<span class="st">`</span><span class="at">Events / yr</span><span class="st">`</span>, <span class="st">`</span><span class="at">bps of AUM</span><span class="st">`</span>), <span class="at">decimals =</span> <span class="dv">1</span>) <span class="sc">|&gt;</span></span>
+<span id="cb4-126"><a href="#cb4-126" aria-hidden="true" tabindex="-1"></a>  gt<span class="sc">::</span><span class="fu">fmt_currency</span>(<span class="st">`</span><span class="at">Mean loss / yr</span><span class="st">`</span>, <span class="at">decimals =</span> <span class="dv">0</span>) <span class="sc">|&gt;</span></span>
+<span id="cb4-127"><a href="#cb4-127" aria-hidden="true" tabindex="-1"></a>  gt<span class="sc">::</span><span class="fu">tab_source_note</span>(<span class="fu">sprintf</span>(<span class="st">"Single-year total loss, pooled over %d databases x %d origin years: median %.1f bps, 95th percentile %.1f bps of AUM (VaR95 %s). Targeted range: 10-15 bps mean; this is an assumption, not a benchmark."</span>,</span>
+<span id="cb4-128"><a href="#cb4-128" aria-hidden="true" tabindex="-1"></a>                              <span class="fu">n_distinct</span>(sims<span class="sc">$</span>rep), n_years, <span class="fu">median</span>(year_totals<span class="sc">$</span>inc) <span class="sc">/</span> aum <span class="sc">*</span> <span class="fl">1e4</span>, <span class="fu">quantile</span>(year_totals<span class="sc">$</span>inc, .<span class="dv">95</span>) <span class="sc">/</span> aum <span class="sc">*</span> <span class="fl">1e4</span>, <span class="fu">fmt_usd</span>(<span class="fu">quantile</span>(year_totals<span class="sc">$</span>inc, .<span class="dv">95</span>), <span class="dv">2</span>)))</span>
+<span id="cb4-129"><a href="#cb4-129" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
+<span id="cb4-130"><a href="#cb4-130" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb4-131"><a href="#cb4-131" aria-hidden="true" tabindex="-1"></a>**How to read the table** <span class="dt">&lt;</span><span class="kw">br</span><span class="dt">/&gt;</span></span>
+<span id="cb4-132"><a href="#cb4-132" aria-hidden="true" tabindex="-1"></a>Each row is an event type, showing how many events happen a year, the average yearly loss in dollars, and that loss as basis points (hundredths of a percent) of assets under management. The last row is the total for all types, and the note under the table shows how bad a single year can get.</span>
+<span id="cb4-133"><a href="#cb4-133" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb4-134"><a href="#cb4-134" aria-hidden="true" tabindex="-1"></a>**What the table tells you** <span class="dt">&lt;</span><span class="kw">br</span><span class="dt">/&gt;</span></span>
+<span id="cb4-135"><a href="#cb4-135" aria-hidden="true" tabindex="-1"></a>Total expected loss is about <span class="in">`r fmt_usd(mean(year_totals$inc))`</span> a year, or <span class="in">`r sprintf("%.0f", mean(year_totals$inc) / aum * 1e4)`</span> bps of assets, inside the 10-15 bps target. Trade errors are most of the events but a small share of the dollars, unauthorized trading is about <span class="in">`r sprintf("%.1f", by_type[["Events / yr"]][by_type$type == "unauthorized_trading"])`</span> events a year but roughly <span class="in">`r fmt_pct(by_type[["Mean loss / yr"]][by_type$type == "unauthorized_trading"] / mean(year_totals$inc))`</span> of the loss, and a bad year (95th percentile) is about <span class="in">`r sprintf("%.0f", quantile(year_totals$inc, .95) / aum * 1e4)`</span> bps, so the simulated firm is neither implausibly safe nor implausibly loss-making.</span>
+<span id="cb4-136"><a href="#cb4-136" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb4-137"><a href="#cb4-137" aria-hidden="true" tabindex="-1"></a>**Sanity check table insights** <span class="dt">&lt;</span><span class="kw">br</span><span class="dt">/&gt;</span></span>
+<span id="cb4-138"><a href="#cb4-138" aria-hidden="true" tabindex="-1"></a>Total expected loss is about $6.0M a year, or 12 basis points of the assumed $5B in assets, which sits within the 10–15 bps target range. Trade errors make up nearly all of the roughly 325 events a year but only a fifth of the loss (2.5 of 12.1 bps), while the 1.4 unauthorized events a year are about 40% of it (4.9 bps), and a bad year (95th percentile) runs to about 23 bps, close to $11.5M.</span>
+<span id="cb4-139"><a href="#cb4-139" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb4-140"><a href="#cb4-140" aria-hidden="true" tabindex="-1"></a>One note on item 2: the "quarters" in the plot are discovery lags, while the "10-year window" is the horizon of the simulated loss history. If a board member might confuse the two, I'd say "10-year history" in place of "10-year window".</span>
+<span id="cb4-141"><a href="#cb4-141" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb4-142"><a href="#cb4-142" aria-hidden="true" tabindex="-1"></a><span class="fu">## Scenarios</span></span>
+<span id="cb4-143"><a href="#cb4-143" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb4-144"><a href="#cb4-144" aria-hidden="true" tabindex="-1"></a><span class="pp">|</span> Scenario <span class="pp">|</span> What changes <span class="pp">|</span></span>
+<span id="cb4-145"><a href="#cb4-145" aria-hidden="true" tabindex="-1"></a><span class="pp">|---|---|</span></span>
+<span id="cb4-146"><a href="#cb4-146" aria-hidden="true" tabindex="-1"></a><span class="pp">|</span> Baseline <span class="pp">|</span> Stable detection, proportional development <span class="pp">|</span></span>
+<span id="cb4-147"><a href="#cb4-147" aria-hidden="true" tabindex="-1"></a><span class="pp">|</span> Heavy-tail shock <span class="pp">|</span> Two very large unauthorized-trading losses injected: <span class="in">`r fmt_usd(base$scenarios$heavy_tail_shock$injected_events[[1]]$severity, 0)`</span> originating in quarter <span class="in">`r base$scenarios$heavy_tail_shock$injected_events[[1]]$origin`</span> and discovered in quarter <span class="in">`r with(base$scenarios$heavy_tail_shock$injected_events[[1]], origin + lag)`</span> (reported), and <span class="in">`r fmt_usd(base$scenarios$heavy_tail_shock$injected_events[[2]]$severity, 0)`</span> originating in quarter <span class="in">`r base$scenarios$heavy_tail_shock$injected_events[[2]]$origin`</span> and discovered in quarter <span class="in">`r with(base$scenarios$heavy_tail_shock$injected_events[[2]], origin + lag)`</span> (after the evaluation date, so undiscovered) <span class="pp">|</span></span>
+<span id="cb4-148"><a href="#cb4-148" aria-hidden="true" tabindex="-1"></a><span class="pp">|</span> Control improvement <span class="pp">|</span> **Applies to all three event types.** For every event whose discovery quarter $d$ is after the change quarter $c =$ <span class="in">`r params$scenarios$control_improvement$control_shift$calendar_quarter`</span>, the discovery quarter becomes $c + \lfloor (d - c)(1 - r) \rfloor$ with $r =$ <span class="in">`r fmt_pct(params$scenarios$control_improvement$control_shift$reduction)`</span>. This covers both events already pending at $c$ and events that originate afterwards. Severity is drawn before the shift, so only timing changes, not the loss amount. <span class="pp">|</span></span>
+<span id="cb4-149"><a href="#cb4-149" aria-hidden="true" tabindex="-1"></a><span class="pp">|</span> Exposure growth <span class="pp">|</span> Volume growth rises to <span class="in">`r fmt_pct(params$scenarios$exposure_growth$exposure$growth_per_quarter, 0)`</span> per quarter <span class="pp">|</span></span>
+<span id="cb4-150"><a href="#cb4-150" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb4-151"><a href="#cb4-151" aria-hidden="true" tabindex="-1"></a>The two example **controls** on the <span class="co">[</span><span class="ot">Control Value</span><span class="co">](controls.qmd)</span> page work differently from the control-improvement scenario above. They shift the lag-distribution parameters (additively, for the event types listed in <span class="in">`params.yaml`</span>) for the whole simulated history before severities are drawn, so a faster-detected event is also smaller through the $(1 + e \times \text{lag})$ term.</span>
+</code></pre></div><button title="Copy to Clipboard" class="code-copy-button" data-in-quarto-modal=""><i class="bi"></i></button></div>
+</div></div></div></div></div>
 </div> <!-- /content -->
 <footer class="footer">
   <div class="nav-footer">
@@ -1823,8 +2025,41 @@ Table&nbsp;2
     </div>
   </div>
 </footer>
+<script>var lightboxQuarto = GLightbox({"closeEffect":"zoom","descPosition":"bottom","loop":false,"openEffect":"zoom","selector":".lightbox"});
+(function() {
+  let previousOnload = window.onload;
+  window.onload = () => {
+    if (previousOnload) {
+      previousOnload();
+    }
+    lightboxQuarto.on('slide_before_load', (data) => {
+      const { slideIndex, slideNode, slideConfig, player, trigger } = data;
+      const href = trigger.getAttribute('href');
+      if (href !== null) {
+        const imgEl = window.document.querySelector(`a[href="${href}"] img`);
+        if (imgEl !== null) {
+          const srcAttr = imgEl.getAttribute("src");
+          if (srcAttr && srcAttr.startsWith("data:")) {
+            slideConfig.href = srcAttr;
+          }
+        }
+      } 
+    });
+  
+    lightboxQuarto.on('slide_after_load', (data) => {
+      const { slideIndex, slideNode, slideConfig, player, trigger } = data;
+      if (window.Quarto?.typesetMath) {
+        window.Quarto.typesetMath(slideNode);
+      }
+    });
+  
+  };
+  
+})();
+          </script>
 
 
 
 
+<script src="site_libs/quarto-html/zenscroll-min.js"></script>
 </body></html>
