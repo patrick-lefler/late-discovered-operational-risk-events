@@ -5007,6 +5007,11 @@
       "Maintainer": "Simon Potter <simon@sjp.co.nz>",
       "Repository": "CRAN"
     },
+    "sessioninfo": {
+      "Package": "sessioninfo",
+      "Version": "1.2.3",
+      "Source": "Repository"
+    },
     "statmod": {
       "Package": "statmod",
       "Version": "1.5.1",

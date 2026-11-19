@@ -62,6 +62,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <script src="site_libs/quarto-nav/headroom.min.js"></script>
 <link href="./ml-appendix.html" rel="next">
 <link href="./controls.html" rel="prev">
+<link href="./assets/images/favicon.svg" rel="icon" type="image/svg+xml">
 <script src="site_libs/clipboard/clipboard.min.js"></script>
 <script src="site_libs/quarto-html/quarto.js" type="module"></script>
 <script src="site_libs/quarto-html/tabsets/tabsets.js" type="module"></script>
@@ -73,7 +74,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <link href="site_libs/quarto-html/quarto-syntax-highlighting-587c61ba64f3a5504c4d52d930310e48.css" rel="stylesheet" id="quarto-text-highlighting-styles">
 <script src="site_libs/bootstrap/bootstrap.min.js"></script>
 <link href="site_libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
-<link href="site_libs/bootstrap/bootstrap-27a998fbd444cbea4325d855b637c53e.min.css" rel="stylesheet" append-hash="true" id="quarto-bootstrap" data-mode="light">
+<link href="site_libs/bootstrap/bootstrap-14fc7787e48927cca1cfdea7cd9d3ef6.min.css" rel="stylesheet" append-hash="true" id="quarto-bootstrap" data-mode="light">
 <script id="quarto-search-options" type="application/json">{
   "language": {
     "search-no-results-text": "No results",
@@ -142,9 +143,10 @@ window.Quarto = {
 <!-- sidebar -->
   <nav id="quarto-sidebar" class="sidebar collapse collapse-horizontal quarto-sidebar-collapse-item sidebar-navigation floating overflow-auto">
     <div class="pt-lg-2 mt-2 text-left sidebar-header">
-    <div class="sidebar-title mb-0 py-0">
-      <a href="./">Late-Discovered Operational Risk Events</a> 
-    </div>
+      <a href="./index.html" class="sidebar-logo-link">
+      <img src="./assets/images/logo.svg" alt="Seeking Eureka" class="sidebar-logo light-content py-0 d-lg-inline d-none">
+      <img src="./assets/images/logo.svg" alt="Seeking Eureka" class="sidebar-logo dark-content py-0 d-lg-inline d-none">
+      </a>
       </div>
     <div class="sidebar-menu-container"> 
     <ul class="list-unstyled mt-1">
@@ -195,7 +197,7 @@ window.Quarto = {
    
   <ul>
   <li><a href="#one-command" id="toc-one-command" class="nav-link active" data-scroll-target="#one-command">One command</a></li>
-  <li><a href="#environment" id="toc-environment" class="nav-link" data-scroll-target="#environment">Environment</a></li>
+  <li><a href="#env-status" id="toc-env-status" class="nav-link" data-scroll-target="#env-status">Environment status</a></li>
   <li><a href="#randomness" id="toc-randomness" class="nav-link" data-scroll-target="#randomness">Randomness</a></li>
   <li><a href="#parameters" id="toc-parameters" class="nav-link" data-scroll-target="#parameters">Parameters</a></li>
   <li><a href="#data-lineage" id="toc-data-lineage" class="nav-link" data-scroll-target="#data-lineage">Data lineage</a></li>
@@ -209,7 +211,8 @@ window.Quarto = {
   <li><a href="#what-client-data-would-replace-each-assumption" id="toc-what-client-data-would-replace-each-assumption" class="nav-link" data-scroll-target="#what-client-data-would-replace-each-assumption">What client data would replace each assumption</a></li>
   <li><a href="#use-of-the-results" id="toc-use-of-the-results" class="nav-link" data-scroll-target="#use-of-the-results">Use of the results</a></li>
   </ul></li>
-  <li><a href="#session-information" id="toc-session-information" class="nav-link" data-scroll-target="#session-information">Session Information</a></li>
+  <li><a href="#licenses" id="toc-licenses" class="nav-link" data-scroll-target="#licenses">Licenses</a></li>
+  <li><a href="#environment" id="toc-environment" class="nav-link" data-scroll-target="#environment">Software environment</a></li>
   </ul>
 </nav>
     </div>
@@ -244,8 +247,8 @@ window.Quarto = {
 <span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a><span class="ex">Rscript</span> run_all.R               <span class="co"># simulations -&gt; mlReserve experiment -&gt; site in docs/</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <p><code>run_all.R</code> runs <code>run_simulations.R</code> (replications, control study, break-even), installs the pinned <code>mlReserve</code> fork into an isolated library if needed and runs <code>run_mlreserve.R</code>, then calls <code>quarto render</code>.</p>
 </section>
-<section id="environment" class="level2">
-<h2 class="anchored" data-anchor-id="environment">Environment</h2>
+<section id="env-status" class="level2">
+<h2 class="anchored" data-anchor-id="env-status">Environment status</h2>
 <div class="cell">
 <details class="code-fold">
 <summary>Code</summary>
@@ -257,23 +260,23 @@ window.Quarto = {
 <span id="cb2-6"><a href="#cb2-6" aria-hidden="true" tabindex="-1"></a>) <span class="sc">|&gt;</span> gt<span class="sc">::</span><span class="fu">gt</span>()</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 </details>
 <div class="cell-output-display">
-<div id="gcrtwgtjgu" style="padding-left:0px;padding-right:0px;padding-top:10px;padding-bottom:10px;overflow-x:auto;overflow-y:auto;width:auto;height:auto;">
-<style>#gcrtwgtjgu table {
+<div id="kbdcwlhxuz" style="padding-left:0px;padding-right:0px;padding-top:10px;padding-bottom:10px;overflow-x:auto;overflow-y:auto;width:auto;height:auto;">
+<style>#kbdcwlhxuz table {
   font-family: system-ui, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif, 'Apple Color Emoji', 'Segoe UI Emoji', 'Segoe UI Symbol', 'Noto Color Emoji';
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
 }
 
-#gcrtwgtjgu thead, #gcrtwgtjgu tbody, #gcrtwgtjgu tfoot, #gcrtwgtjgu tr, #gcrtwgtjgu td, #gcrtwgtjgu th {
+#kbdcwlhxuz thead, #kbdcwlhxuz tbody, #kbdcwlhxuz tfoot, #kbdcwlhxuz tr, #kbdcwlhxuz td, #kbdcwlhxuz th {
   border-style: none;
 }
 
-#gcrtwgtjgu p {
+#kbdcwlhxuz p {
   margin: 0;
   padding: 0;
 }
 
-#gcrtwgtjgu .gt_table {
+#kbdcwlhxuz .gt_table {
   display: table;
   border-collapse: collapse;
   line-height: normal;
@@ -299,12 +302,12 @@ window.Quarto = {
   border-left-color: #D3D3D3;
 }
 
-#gcrtwgtjgu .gt_caption {
+#kbdcwlhxuz .gt_caption {
   padding-top: 4px;
   padding-bottom: 4px;
 }
 
-#gcrtwgtjgu .gt_title {
+#kbdcwlhxuz .gt_title {
   color: #333333;
   font-size: 125%;
   font-weight: initial;
@@ -316,7 +319,7 @@ window.Quarto = {
   border-bottom-width: 0;
 }
 
-#gcrtwgtjgu .gt_subtitle {
+#kbdcwlhxuz .gt_subtitle {
   color: #333333;
   font-size: 85%;
   font-weight: initial;
@@ -328,7 +331,7 @@ window.Quarto = {
   border-top-width: 0;
 }
 
-#gcrtwgtjgu .gt_heading {
+#kbdcwlhxuz .gt_heading {
   background-color: #FFFFFF;
   text-align: center;
   border-bottom-color: #FFFFFF;
@@ -340,13 +343,13 @@ window.Quarto = {
   border-right-color: #D3D3D3;
 }
 
-#gcrtwgtjgu .gt_bottom_border {
+#kbdcwlhxuz .gt_bottom_border {
   border-bottom-style: solid;
   border-bottom-width: 2px;
   border-bottom-color: #D3D3D3;
 }
 
-#gcrtwgtjgu .gt_col_headings {
+#kbdcwlhxuz .gt_col_headings {
   border-top-style: solid;
   border-top-width: 2px;
   border-top-color: #D3D3D3;
@@ -361,7 +364,7 @@ window.Quarto = {
   border-right-color: #D3D3D3;
 }
 
-#gcrtwgtjgu .gt_col_heading {
+#kbdcwlhxuz .gt_col_heading {
   color: #333333;
   background-color: #FFFFFF;
   font-size: 100%;
@@ -381,7 +384,7 @@ window.Quarto = {
   overflow-x: hidden;
 }
 
-#gcrtwgtjgu .gt_column_spanner_outer {
+#kbdcwlhxuz .gt_column_spanner_outer {
   color: #333333;
   background-color: #FFFFFF;
   font-size: 100%;
@@ -393,15 +396,15 @@ window.Quarto = {
   padding-right: 4px;
 }
 
-#gcrtwgtjgu .gt_column_spanner_outer:first-child {
+#kbdcwlhxuz .gt_column_spanner_outer:first-child {
   padding-left: 0;
 }
 
-#gcrtwgtjgu .gt_column_spanner_outer:last-child {
+#kbdcwlhxuz .gt_column_spanner_outer:last-child {
   padding-right: 0;
 }
 
-#gcrtwgtjgu .gt_column_spanner {
+#kbdcwlhxuz .gt_column_spanner {
   border-bottom-style: solid;
   border-bottom-width: 2px;
   border-bottom-color: #D3D3D3;
@@ -413,11 +416,11 @@ window.Quarto = {
   width: 100%;
 }
 
-#gcrtwgtjgu .gt_spanner_row {
+#kbdcwlhxuz .gt_spanner_row {
   border-bottom-style: hidden;
 }
 
-#gcrtwgtjgu .gt_group_heading {
+#kbdcwlhxuz .gt_group_heading {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -443,7 +446,7 @@ window.Quarto = {
   text-align: left;
 }
 
-#gcrtwgtjgu .gt_empty_group_heading {
+#kbdcwlhxuz .gt_empty_group_heading {
   padding: 0.5px;
   color: #333333;
   background-color: #FFFFFF;
@@ -458,15 +461,15 @@ window.Quarto = {
   vertical-align: middle;
 }
 
-#gcrtwgtjgu .gt_from_md > :first-child {
+#kbdcwlhxuz .gt_from_md > :first-child {
   margin-top: 0;
 }
 
-#gcrtwgtjgu .gt_from_md > :last-child {
+#kbdcwlhxuz .gt_from_md > :last-child {
   margin-bottom: 0;
 }
 
-#gcrtwgtjgu .gt_row {
+#kbdcwlhxuz .gt_row {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -485,7 +488,7 @@ window.Quarto = {
   overflow-x: hidden;
 }
 
-#gcrtwgtjgu .gt_stub {
+#kbdcwlhxuz .gt_stub {
   color: #333333;
   background-color: #FFFFFF;
   font-size: 100%;
@@ -498,7 +501,7 @@ window.Quarto = {
   padding-right: 5px;
 }
 
-#gcrtwgtjgu .gt_stub_row_group {
+#kbdcwlhxuz .gt_stub_row_group {
   color: #333333;
   background-color: #FFFFFF;
   font-size: 100%;
@@ -512,15 +515,15 @@ window.Quarto = {
   vertical-align: top;
 }
 
-#gcrtwgtjgu .gt_row_group_first td {
+#kbdcwlhxuz .gt_row_group_first td {
   border-top-width: 2px;
 }
 
-#gcrtwgtjgu .gt_row_group_first th {
+#kbdcwlhxuz .gt_row_group_first th {
   border-top-width: 2px;
 }
 
-#gcrtwgtjgu .gt_summary_row {
+#kbdcwlhxuz .gt_summary_row {
   color: #333333;
   background-color: #FFFFFF;
   text-transform: inherit;
@@ -530,16 +533,16 @@ window.Quarto = {
   padding-right: 5px;
 }
 
-#gcrtwgtjgu .gt_first_summary_row {
+#kbdcwlhxuz .gt_first_summary_row {
   border-top-style: solid;
   border-top-color: #D3D3D3;
 }
 
-#gcrtwgtjgu .gt_first_summary_row.thick {
+#kbdcwlhxuz .gt_first_summary_row.thick {
   border-top-width: 2px;
 }
 
-#gcrtwgtjgu .gt_last_summary_row {
+#kbdcwlhxuz .gt_last_summary_row {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -549,7 +552,7 @@ window.Quarto = {
   border-bottom-color: #D3D3D3;
 }
 
-#gcrtwgtjgu .gt_grand_summary_row {
+#kbdcwlhxuz .gt_grand_summary_row {
   color: #333333;
   background-color: #FFFFFF;
   text-transform: inherit;
@@ -559,7 +562,7 @@ window.Quarto = {
   padding-right: 5px;
 }
 
-#gcrtwgtjgu .gt_first_grand_summary_row {
+#kbdcwlhxuz .gt_first_grand_summary_row {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -569,7 +572,7 @@ window.Quarto = {
   border-top-color: #D3D3D3;
 }
 
-#gcrtwgtjgu .gt_last_grand_summary_row_top {
+#kbdcwlhxuz .gt_last_grand_summary_row_top {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -579,11 +582,11 @@ window.Quarto = {
   border-bottom-color: #D3D3D3;
 }
 
-#gcrtwgtjgu .gt_striped {
+#kbdcwlhxuz .gt_striped {
   background-color: rgba(128, 128, 128, 0.05);
 }
 
-#gcrtwgtjgu .gt_table_body {
+#kbdcwlhxuz .gt_table_body {
   border-top-style: solid;
   border-top-width: 2px;
   border-top-color: #D3D3D3;
@@ -592,7 +595,7 @@ window.Quarto = {
   border-bottom-color: #D3D3D3;
 }
 
-#gcrtwgtjgu .gt_footnotes {
+#kbdcwlhxuz .gt_footnotes {
   color: #333333;
   background-color: #FFFFFF;
   border-bottom-style: none;
@@ -606,7 +609,7 @@ window.Quarto = {
   border-right-color: #D3D3D3;
 }
 
-#gcrtwgtjgu .gt_footnote {
+#kbdcwlhxuz .gt_footnote {
   margin: 0px;
   font-size: 90%;
   padding-top: 4px;
@@ -615,7 +618,7 @@ window.Quarto = {
   padding-right: 5px;
 }
 
-#gcrtwgtjgu .gt_sourcenotes {
+#kbdcwlhxuz .gt_sourcenotes {
   color: #333333;
   background-color: #FFFFFF;
   border-bottom-style: none;
@@ -629,7 +632,7 @@ window.Quarto = {
   border-right-color: #D3D3D3;
 }
 
-#gcrtwgtjgu .gt_sourcenote {
+#kbdcwlhxuz .gt_sourcenote {
   font-size: 90%;
   padding-top: 4px;
   padding-bottom: 4px;
@@ -637,72 +640,72 @@ window.Quarto = {
   padding-right: 5px;
 }
 
-#gcrtwgtjgu .gt_left {
+#kbdcwlhxuz .gt_left {
   text-align: left;
 }
 
-#gcrtwgtjgu .gt_center {
+#kbdcwlhxuz .gt_center {
   text-align: center;
 }
 
-#gcrtwgtjgu .gt_right {
+#kbdcwlhxuz .gt_right {
   text-align: right;
   font-variant-numeric: tabular-nums;
 }
 
-#gcrtwgtjgu .gt_font_normal {
+#kbdcwlhxuz .gt_font_normal {
   font-weight: normal;
 }
 
-#gcrtwgtjgu .gt_font_bold {
+#kbdcwlhxuz .gt_font_bold {
   font-weight: bold;
 }
 
-#gcrtwgtjgu .gt_font_italic {
+#kbdcwlhxuz .gt_font_italic {
   font-style: italic;
 }
 
-#gcrtwgtjgu .gt_super {
+#kbdcwlhxuz .gt_super {
   font-size: 65%;
 }
 
-#gcrtwgtjgu .gt_footnote_marks {
+#kbdcwlhxuz .gt_footnote_marks {
   font-size: 75%;
   vertical-align: 0.4em;
   position: initial;
 }
 
-#gcrtwgtjgu .gt_asterisk {
+#kbdcwlhxuz .gt_asterisk {
   font-size: 100%;
   vertical-align: 0;
 }
 
-#gcrtwgtjgu .gt_indent_1 {
+#kbdcwlhxuz .gt_indent_1 {
   text-indent: 5px;
 }
 
-#gcrtwgtjgu .gt_indent_2 {
+#kbdcwlhxuz .gt_indent_2 {
   text-indent: 10px;
 }
 
-#gcrtwgtjgu .gt_indent_3 {
+#kbdcwlhxuz .gt_indent_3 {
   text-indent: 15px;
 }
 
-#gcrtwgtjgu .gt_indent_4 {
+#kbdcwlhxuz .gt_indent_4 {
   text-indent: 20px;
 }
 
-#gcrtwgtjgu .gt_indent_5 {
+#kbdcwlhxuz .gt_indent_5 {
   text-indent: 25px;
 }
 
-#gcrtwgtjgu .katex-display {
+#kbdcwlhxuz .katex-display {
   display: inline-flex !important;
   margin-bottom: 0.75em !important;
 }
 
-#gcrtwgtjgu div.Reactable > div.rt-table > div.rt-thead > div.rt-tr.rt-tr-group-header > div.rt-th-group:after {
+#kbdcwlhxuz div.Reactable > div.rt-table > div.rt-thead > div.rt-tr.rt-tr-group-header > div.rt-th-group:after {
   height: 0px !important;
 }
 </style>
@@ -717,11 +720,11 @@ window.Quarto = {
 <tbody class="gt_table_body">
 <tr class="odd">
 <td class="gt_row gt_left" headers="Item">Rendered</td>
-<td class="gt_row gt_left" headers="Value">2026-11-16 15:30 EST</td>
+<td class="gt_row gt_left" headers="Value">2026-11-19 14:58 EST</td>
 </tr>
 <tr class="even">
 <td class="gt_row gt_left" headers="Item">Project git commit</td>
-<td class="gt_row gt_left" headers="Value">e5a18b3 (uncommitted changes)</td>
+<td class="gt_row gt_left" headers="Value">ae441c6 (uncommitted changes)</td>
 </tr>
 <tr class="odd">
 <td class="gt_row gt_left" headers="Item">R</td>
@@ -756,12 +759,7 @@ window.Quarto = {
 <p>The package versions are pinned in <code>renv.lock</code>. Status of the project library against the lockfile:</p>
 <div class="cell">
 <div class="cell-output cell-output-stdout">
-<pre><code>The following package(s) are in an inconsistent state:
-
- package     installed recorded used
- sessioninfo y         n        y   
-
-See `?renv::status` for advice on resolving these issues.</code></pre>
+<pre><code>No issues found -- the project is in a consistent state.</code></pre>
 </div>
 </div>
 <p>The experimental fork is installed from GitHub at the pinned commit into <code>lib_mlreserve/</code>, outside renv, so installing it cannot change the CRAN ChainLadder version.</p>
@@ -926,23 +924,23 @@ See `?renv::status` for advice on resolving these issues.</code></pre>
 <span id="cb9-5"><a href="#cb9-5" aria-hidden="true" tabindex="-1"></a>})) <span class="sc">|&gt;</span> gt<span class="sc">::</span><span class="fu">gt</span>()</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 </details>
 <div class="cell-output-display">
-<div id="dgwrdnuezf" style="padding-left:0px;padding-right:0px;padding-top:10px;padding-bottom:10px;overflow-x:auto;overflow-y:auto;width:auto;height:auto;">
-<style>#dgwrdnuezf table {
+<div id="otqlvjosqk" style="padding-left:0px;padding-right:0px;padding-top:10px;padding-bottom:10px;overflow-x:auto;overflow-y:auto;width:auto;height:auto;">
+<style>#otqlvjosqk table {
   font-family: system-ui, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif, 'Apple Color Emoji', 'Segoe UI Emoji', 'Segoe UI Symbol', 'Noto Color Emoji';
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
 }
 
-#dgwrdnuezf thead, #dgwrdnuezf tbody, #dgwrdnuezf tfoot, #dgwrdnuezf tr, #dgwrdnuezf td, #dgwrdnuezf th {
+#otqlvjosqk thead, #otqlvjosqk tbody, #otqlvjosqk tfoot, #otqlvjosqk tr, #otqlvjosqk td, #otqlvjosqk th {
   border-style: none;
 }
 
-#dgwrdnuezf p {
+#otqlvjosqk p {
   margin: 0;
   padding: 0;
 }
 
-#dgwrdnuezf .gt_table {
+#otqlvjosqk .gt_table {
   display: table;
   border-collapse: collapse;
   line-height: normal;
@@ -968,12 +966,12 @@ See `?renv::status` for advice on resolving these issues.</code></pre>
   border-left-color: #D3D3D3;
 }
 
-#dgwrdnuezf .gt_caption {
+#otqlvjosqk .gt_caption {
   padding-top: 4px;
   padding-bottom: 4px;
 }
 
-#dgwrdnuezf .gt_title {
+#otqlvjosqk .gt_title {
   color: #333333;
   font-size: 125%;
   font-weight: initial;
@@ -985,7 +983,7 @@ See `?renv::status` for advice on resolving these issues.</code></pre>
   border-bottom-width: 0;
 }
 
-#dgwrdnuezf .gt_subtitle {
+#otqlvjosqk .gt_subtitle {
   color: #333333;
   font-size: 85%;
   font-weight: initial;
@@ -997,7 +995,7 @@ See `?renv::status` for advice on resolving these issues.</code></pre>
   border-top-width: 0;
 }
 
-#dgwrdnuezf .gt_heading {
+#otqlvjosqk .gt_heading {
   background-color: #FFFFFF;
   text-align: center;
   border-bottom-color: #FFFFFF;
@@ -1009,13 +1007,13 @@ See `?renv::status` for advice on resolving these issues.</code></pre>
   border-right-color: #D3D3D3;
 }
 
-#dgwrdnuezf .gt_bottom_border {
+#otqlvjosqk .gt_bottom_border {
   border-bottom-style: solid;
   border-bottom-width: 2px;
   border-bottom-color: #D3D3D3;
 }
 
-#dgwrdnuezf .gt_col_headings {
+#otqlvjosqk .gt_col_headings {
   border-top-style: solid;
   border-top-width: 2px;
   border-top-color: #D3D3D3;
@@ -1030,7 +1028,7 @@ See `?renv::status` for advice on resolving these issues.</code></pre>
   border-right-color: #D3D3D3;
 }
 
-#dgwrdnuezf .gt_col_heading {
+#otqlvjosqk .gt_col_heading {
   color: #333333;
   background-color: #FFFFFF;
   font-size: 100%;
@@ -1050,7 +1048,7 @@ See `?renv::status` for advice on resolving these issues.</code></pre>
   overflow-x: hidden;
 }
 
-#dgwrdnuezf .gt_column_spanner_outer {
+#otqlvjosqk .gt_column_spanner_outer {
   color: #333333;
   background-color: #FFFFFF;
   font-size: 100%;
@@ -1062,15 +1060,15 @@ See `?renv::status` for advice on resolving these issues.</code></pre>
   padding-right: 4px;
 }
 
-#dgwrdnuezf .gt_column_spanner_outer:first-child {
+#otqlvjosqk .gt_column_spanner_outer:first-child {
   padding-left: 0;
 }
 
-#dgwrdnuezf .gt_column_spanner_outer:last-child {
+#otqlvjosqk .gt_column_spanner_outer:last-child {
   padding-right: 0;
 }
 
-#dgwrdnuezf .gt_column_spanner {
+#otqlvjosqk .gt_column_spanner {
   border-bottom-style: solid;
   border-bottom-width: 2px;
   border-bottom-color: #D3D3D3;
@@ -1082,11 +1080,11 @@ See `?renv::status` for advice on resolving these issues.</code></pre>
   width: 100%;
 }
 
-#dgwrdnuezf .gt_spanner_row {
+#otqlvjosqk .gt_spanner_row {
   border-bottom-style: hidden;
 }
 
-#dgwrdnuezf .gt_group_heading {
+#otqlvjosqk .gt_group_heading {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -1112,7 +1110,7 @@ See `?renv::status` for advice on resolving these issues.</code></pre>
   text-align: left;
 }
 
-#dgwrdnuezf .gt_empty_group_heading {
+#otqlvjosqk .gt_empty_group_heading {
   padding: 0.5px;
   color: #333333;
   background-color: #FFFFFF;
@@ -1127,15 +1125,15 @@ See `?renv::status` for advice on resolving these issues.</code></pre>
   vertical-align: middle;
 }
 
-#dgwrdnuezf .gt_from_md > :first-child {
+#otqlvjosqk .gt_from_md > :first-child {
   margin-top: 0;
 }
 
-#dgwrdnuezf .gt_from_md > :last-child {
+#otqlvjosqk .gt_from_md > :last-child {
   margin-bottom: 0;
 }
 
-#dgwrdnuezf .gt_row {
+#otqlvjosqk .gt_row {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -1154,7 +1152,7 @@ See `?renv::status` for advice on resolving these issues.</code></pre>
   overflow-x: hidden;
 }
 
-#dgwrdnuezf .gt_stub {
+#otqlvjosqk .gt_stub {
   color: #333333;
   background-color: #FFFFFF;
   font-size: 100%;
@@ -1167,7 +1165,7 @@ See `?renv::status` for advice on resolving these issues.</code></pre>
   padding-right: 5px;
 }
 
-#dgwrdnuezf .gt_stub_row_group {
+#otqlvjosqk .gt_stub_row_group {
   color: #333333;
   background-color: #FFFFFF;
   font-size: 100%;
@@ -1181,15 +1179,15 @@ See `?renv::status` for advice on resolving these issues.</code></pre>
   vertical-align: top;
 }
 
-#dgwrdnuezf .gt_row_group_first td {
+#otqlvjosqk .gt_row_group_first td {
   border-top-width: 2px;
 }
 
-#dgwrdnuezf .gt_row_group_first th {
+#otqlvjosqk .gt_row_group_first th {
   border-top-width: 2px;
 }
 
-#dgwrdnuezf .gt_summary_row {
+#otqlvjosqk .gt_summary_row {
   color: #333333;
   background-color: #FFFFFF;
   text-transform: inherit;
@@ -1199,16 +1197,16 @@ See `?renv::status` for advice on resolving these issues.</code></pre>
   padding-right: 5px;
 }
 
-#dgwrdnuezf .gt_first_summary_row {
+#otqlvjosqk .gt_first_summary_row {
   border-top-style: solid;
   border-top-color: #D3D3D3;
 }
 
-#dgwrdnuezf .gt_first_summary_row.thick {
+#otqlvjosqk .gt_first_summary_row.thick {
   border-top-width: 2px;
 }
 
-#dgwrdnuezf .gt_last_summary_row {
+#otqlvjosqk .gt_last_summary_row {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -1218,7 +1216,7 @@ See `?renv::status` for advice on resolving these issues.</code></pre>
   border-bottom-color: #D3D3D3;
 }
 
-#dgwrdnuezf .gt_grand_summary_row {
+#otqlvjosqk .gt_grand_summary_row {
   color: #333333;
   background-color: #FFFFFF;
   text-transform: inherit;
@@ -1228,7 +1226,7 @@ See `?renv::status` for advice on resolving these issues.</code></pre>
   padding-right: 5px;
 }
 
-#dgwrdnuezf .gt_first_grand_summary_row {
+#otqlvjosqk .gt_first_grand_summary_row {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -1238,7 +1236,7 @@ See `?renv::status` for advice on resolving these issues.</code></pre>
   border-top-color: #D3D3D3;
 }
 
-#dgwrdnuezf .gt_last_grand_summary_row_top {
+#otqlvjosqk .gt_last_grand_summary_row_top {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -1248,11 +1246,11 @@ See `?renv::status` for advice on resolving these issues.</code></pre>
   border-bottom-color: #D3D3D3;
 }
 
-#dgwrdnuezf .gt_striped {
+#otqlvjosqk .gt_striped {
   background-color: rgba(128, 128, 128, 0.05);
 }
 
-#dgwrdnuezf .gt_table_body {
+#otqlvjosqk .gt_table_body {
   border-top-style: solid;
   border-top-width: 2px;
   border-top-color: #D3D3D3;
@@ -1261,7 +1259,7 @@ See `?renv::status` for advice on resolving these issues.</code></pre>
   border-bottom-color: #D3D3D3;
 }
 
-#dgwrdnuezf .gt_footnotes {
+#otqlvjosqk .gt_footnotes {
   color: #333333;
   background-color: #FFFFFF;
   border-bottom-style: none;
@@ -1275,7 +1273,7 @@ See `?renv::status` for advice on resolving these issues.</code></pre>
   border-right-color: #D3D3D3;
 }
 
-#dgwrdnuezf .gt_footnote {
+#otqlvjosqk .gt_footnote {
   margin: 0px;
   font-size: 90%;
   padding-top: 4px;
@@ -1284,7 +1282,7 @@ See `?renv::status` for advice on resolving these issues.</code></pre>
   padding-right: 5px;
 }
 
-#dgwrdnuezf .gt_sourcenotes {
+#otqlvjosqk .gt_sourcenotes {
   color: #333333;
   background-color: #FFFFFF;
   border-bottom-style: none;
@@ -1298,7 +1296,7 @@ See `?renv::status` for advice on resolving these issues.</code></pre>
   border-right-color: #D3D3D3;
 }
 
-#dgwrdnuezf .gt_sourcenote {
+#otqlvjosqk .gt_sourcenote {
   font-size: 90%;
   padding-top: 4px;
   padding-bottom: 4px;
@@ -1306,72 +1304,72 @@ See `?renv::status` for advice on resolving these issues.</code></pre>
   padding-right: 5px;
 }
 
-#dgwrdnuezf .gt_left {
+#otqlvjosqk .gt_left {
   text-align: left;
 }
 
-#dgwrdnuezf .gt_center {
+#otqlvjosqk .gt_center {
   text-align: center;
 }
 
-#dgwrdnuezf .gt_right {
+#otqlvjosqk .gt_right {
   text-align: right;
   font-variant-numeric: tabular-nums;
 }
 
-#dgwrdnuezf .gt_font_normal {
+#otqlvjosqk .gt_font_normal {
   font-weight: normal;
 }
 
-#dgwrdnuezf .gt_font_bold {
+#otqlvjosqk .gt_font_bold {
   font-weight: bold;
 }
 
-#dgwrdnuezf .gt_font_italic {
+#otqlvjosqk .gt_font_italic {
   font-style: italic;
 }
 
-#dgwrdnuezf .gt_super {
+#otqlvjosqk .gt_super {
   font-size: 65%;
 }
 
-#dgwrdnuezf .gt_footnote_marks {
+#otqlvjosqk .gt_footnote_marks {
   font-size: 75%;
   vertical-align: 0.4em;
   position: initial;
 }
 
-#dgwrdnuezf .gt_asterisk {
+#otqlvjosqk .gt_asterisk {
   font-size: 100%;
   vertical-align: 0;
 }
 
-#dgwrdnuezf .gt_indent_1 {
+#otqlvjosqk .gt_indent_1 {
   text-indent: 5px;
 }
 
-#dgwrdnuezf .gt_indent_2 {
+#otqlvjosqk .gt_indent_2 {
   text-indent: 10px;
 }
 
-#dgwrdnuezf .gt_indent_3 {
+#otqlvjosqk .gt_indent_3 {
   text-indent: 15px;
 }
 
-#dgwrdnuezf .gt_indent_4 {
+#otqlvjosqk .gt_indent_4 {
   text-indent: 20px;
 }
 
-#dgwrdnuezf .gt_indent_5 {
+#otqlvjosqk .gt_indent_5 {
   text-indent: 25px;
 }
 
-#dgwrdnuezf .katex-display {
+#otqlvjosqk .katex-display {
   display: inline-flex !important;
   margin-bottom: 0.75em !important;
 }
 
-#dgwrdnuezf div.Reactable > div.rt-table > div.rt-thead > div.rt-tr.rt-tr-group-header > div.rt-th-group:after {
+#otqlvjosqk div.Reactable > div.rt-table > div.rt-thead > div.rt-tr.rt-tr-group-header > div.rt-th-group:after {
   height: 0px !important;
 }
 </style>
@@ -2104,8 +2102,36 @@ See `?renv::status` for advice on resolving these issues.</code></pre>
 <p>The numbers on this site are illustrations of method behaviour. They should not be quoted as estimates of any firm’s undiscovered losses or as a benchmark for the value of a particular control.</p>
 </section>
 </section>
-<section id="session-information" class="level2">
-<h2 class="anchored" data-anchor-id="session-information">Session Information</h2>
+<section id="licenses" class="level2">
+<h2 class="anchored" data-anchor-id="licenses">Licenses</h2>
+<p>The code on this site is released under the <a href="./license.html">MIT License</a>. All data are synthetic: they are generated by the code in this repository from <code>params.yaml</code>, so they carry the same MIT License and contain no third-party or client data. Third-party software used for the estimates keeps its own terms:</p>
+<table class="caption-top table">
+<thead>
+<tr class="header">
+<th style="text-align: left;">Source</th>
+<th style="text-align: left;">Terms</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td style="text-align: left;">Synthetic loss events and results in <code>data/</code> (generated by this project)</td>
+<td style="text-align: left;"><a href="./license.html">MIT License</a></td>
+</tr>
+<tr class="even">
+<td style="text-align: left;"><code>ChainLadder</code> R package (CRAN), all headline results</td>
+<td style="text-align: left;"><a href="https://cran.r-project.org/package=ChainLadder">GPL (&gt;= 2)</a></td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;"><code>mlReserve</code> fork of <code>ChainLadder</code> (GitHub, pinned commit), ML appendix only</td>
+<td style="text-align: left;"><a href="https://github.com/thierrymoudiki/ChainLadder/blob/master/DESCRIPTION">GPL (&gt;= 2)</a></td>
+</tr>
+</tbody>
+</table>
+<p>The packages are installed from their sources at build time and are not redistributed in this repository.</p>
+</section>
+<section id="environment" class="level2">
+<h2 class="anchored" data-anchor-id="environment">Software environment</h2>
+<p>The site was built with R and Quarto. The analysis loads <code>tidyverse</code>, <code>dplyr</code> and <code>ChainLadder</code>, and also calls <code>gt</code>, <code>scales</code>, <code>yaml</code>, <code>digest</code>, <code>testthat</code>, <code>renv</code> and <code>sessioninfo</code>; the ML appendix runs the <code>mlReserve</code> fork with <code>ranger</code> and <code>e1071</code> from the isolated <code>lib_mlreserve/</code> library (see <a href="#env-status">Environment status</a>). Package versions are pinned in <code>renv.lock</code>; run <code>renv::restore()</code> to install them.</p>
 <div class="callout callout-style-default callout-note no-icon callout-titled">
 <div class="callout-header d-flex align-content-center collapsed" data-bs-toggle="collapse" data-bs-target=".callout-2-contents" aria-controls="callout-2" aria-expanded="false" aria-label="Toggle callout">
 <div class="callout-icon-container">
@@ -2130,7 +2156,7 @@ See `?renv::status` for advice on resolving these issues.</code></pre>
  collate  en_US.UTF-8
  ctype    en_US.UTF-8
  tz       America/New_York
- date     2026-11-16
+ date     2026-11-19
  pandoc   3.10 @ /Applications/Positron.app/Contents/Resources/app/quarto/bin/tools/aarch64/ (via rmarkdown)
  quarto   1.8.26 @ /Applications/quarto/bin/quarto
 

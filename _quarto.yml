@@ -14,8 +14,11 @@ website:
   title: "Late-Discovered Operational Risk Events"
   search: false
   page-navigation: true
+  favicon: assets/images/favicon.svg
   sidebar:
     style: floating
+    logo: assets/images/logo.svg
+    logo-alt: "Seeking Eureka"
     contents:
       - {href: index.qmd, text: Overview}
       - {href: data.qmd, text: Synthetic Data}
