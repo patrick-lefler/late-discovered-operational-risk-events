@@ -22,6 +22,41 @@ ul.task-list li input[type="checkbox"] {
   margin: 0 0.8em 0.2em -1em; /* quarto-specific, see https://github.com/quarto-dev/quarto-cli/issues/4556 */ 
   vertical-align: middle;
 }
+/* CSS for syntax highlighting */
+html { -webkit-text-size-adjust: 100%; }
+pre > code.sourceCode { white-space: pre; position: relative; }
+pre > code.sourceCode > span { display: inline-block; line-height: 1.25; }
+pre > code.sourceCode > span:empty { height: 1.2em; }
+.sourceCode { overflow: visible; }
+code.sourceCode > span { color: inherit; text-decoration: inherit; }
+div.sourceCode { margin: 1em 0; }
+pre.sourceCode { margin: 0; }
+@media screen {
+div.sourceCode { overflow: auto; }
+}
+@media print {
+pre > code.sourceCode { white-space: pre-wrap; }
+pre > code.sourceCode > span { text-indent: -5em; padding-left: 5em; }
+}
+pre.numberSource code
+  { counter-reset: source-line 0; }
+pre.numberSource code > span
+  { position: relative; left: -4em; counter-increment: source-line; }
+pre.numberSource code > span > a:first-child::before
+  { content: counter(source-line);
+    position: relative; left: -1em; text-align: right; vertical-align: baseline;
+    border: none; display: inline-block;
+    -webkit-touch-callout: none; -webkit-user-select: none;
+    -khtml-user-select: none; -moz-user-select: none;
+    -ms-user-select: none; user-select: none;
+    padding: 0 4px; width: 4em;
+  }
+pre.numberSource { margin-left: 3em;  padding-left: 4px; }
+div.sourceCode
+  {   }
+@media screen {
+pre > code.sourceCode > span > a:first-child::before { text-decoration: underline; }
+}
 </style>
 
 
@@ -40,7 +75,10 @@ ul.task-list li input[type="checkbox"] {
 <link href="site_libs/quarto-html/quarto-syntax-highlighting-587c61ba64f3a5504c4d52d930310e48.css" rel="stylesheet" id="quarto-text-highlighting-styles">
 <script src="site_libs/bootstrap/bootstrap.min.js"></script>
 <link href="site_libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
-<link href="site_libs/bootstrap/bootstrap-14fc7787e48927cca1cfdea7cd9d3ef6.min.css" rel="stylesheet" append-hash="true" id="quarto-bootstrap" data-mode="light">
+<link href="site_libs/bootstrap/bootstrap-315aa354fbfbfd45b4b76e88c3271fce.min.css" rel="stylesheet" append-hash="true" id="quarto-bootstrap" data-mode="light">
+<script src="site_libs/quarto-contrib/glightbox/glightbox.min.js"></script>
+<link href="site_libs/quarto-contrib/glightbox/glightbox.min.css" rel="stylesheet">
+<link href="site_libs/quarto-contrib/glightbox/lightbox.css" rel="stylesheet">
 <script id="quarto-search-options" type="application/json">{
   "language": {
     "search-no-results-text": "No results",
@@ -56,6 +94,7 @@ ul.task-list li input[type="checkbox"] {
     "search-label": "Search"
   }
 }</script>
+<style>html{ scroll-behavior: smooth; }</style>
 
 
 </head>
@@ -76,7 +115,7 @@ ul.task-list li input[type="checkbox"] {
   </nav>
 </header>
 <!-- content -->
-<div id="quarto-content" class="quarto-container page-columns page-rows-contents page-layout-article">
+<div id="quarto-content" class="quarto-container page-columns page-rows-contents page-layout-full">
 <!-- sidebar -->
   <nav id="quarto-sidebar" class="sidebar collapse collapse-horizontal quarto-sidebar-collapse-item sidebar-navigation floating overflow-auto">
     <div class="pt-lg-2 mt-2 text-left sidebar-header">
@@ -114,7 +153,7 @@ ul.task-list li input[type="checkbox"] {
         <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="./reproducibility.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text">Reproducibility &amp; Limitations</span></a>
+ <span class="menu-text">Reproducibility</span></a>
   </div>
 </li>
         <li class="sidebar-item">
@@ -130,7 +169,7 @@ ul.task-list li input[type="checkbox"] {
 <!-- margin-sidebar -->
     <div id="quarto-margin-sidebar" class="sidebar margin-sidebar">
         <nav id="TOC" role="doc-toc" class="toc-active">
-    <h2 id="toc-title">On this page</h2>
+    <h2 id="toc-title">contents</h2>
    
   <ul>
   <li><a href="#the-question" id="toc-the-question" class="nav-link active" data-scroll-target="#the-question">The question</a></li>
@@ -150,17 +189,17 @@ ul.task-list li input[type="checkbox"] {
 </nav>
     </div>
 <!-- main -->
-<main class="content" id="quarto-document-content">
+<main class="content column-body" id="quarto-document-content">
 
 <header id="title-block-header" class="quarto-title-block default">
 <div class="quarto-title">
-<h1 class="title">Late-Discovered Operational Risk Events</h1>
+<div class="quarto-title-block"><div><h1 class="title">Late-Discovered Operational Risk Events</h1><button type="button" class="btn code-tools-button" id="quarto-code-tools-source"><i class="bi"></i> Code</button></div></div>
 <p class="subtitle lead">How much loss has already happened but not yet been recorded?</p>
 </div>
 
 
 
-<div class="quarto-title-meta">
+<div class="quarto-title-meta column-body">
 
     <div>
     <div class="quarto-title-meta-heading">Author</div>
@@ -187,13 +226,13 @@ ul.task-list li input[type="checkbox"] {
 <section id="the-question" class="level2">
 <h2 class="anchored" data-anchor-id="the-question">The question</h2>
 <p>Operational losses such as trade errors, NAV pricing errors and unauthorized trading are often found long after they happen, and the loss database records them when they are found. So recent periods look cleaner than they are. This is the actuarial incurred-but-not-reported (IBNR) problem, and run-off triangles, analysed with the <code>ChainLadder</code> R package, are a natural way to estimate what is missing. Losses are booked in full when discovered, so this is a pure IBNR problem: it does not model later development on events already known (provisions, recoveries, insurance; see <a href="./reproducibility.html#sec-limitations">Limitations</a>).</p>
-<div class="callout callout-style-default callout-note callout-titled">
+<div class="callout callout-style-default callout-note no-icon callout-titled">
 <div class="callout-header d-flex align-content-center">
 <div class="callout-icon-container">
-<i class="callout-icon"></i>
+<i class="callout-icon no-icon"></i>
 </div>
 <div class="callout-title-container flex-fill">
-<span class="screen-reader-only">Note</span>Read this first
+<span class="screen-reader-only">Note</span>Important
 </div>
 </div>
 <div class="callout-body-container callout-body">
@@ -265,7 +304,7 @@ ul.task-list li input[type="checkbox"] {
 <div id="fig-triangle" class="quarto-float quarto-figure quarto-figure-center anchored">
 <figure class="quarto-float quarto-float-fig figure">
 <div aria-describedby="fig-triangle-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
-<img src="index_files/figure-html/fig-triangle-1.png" class="img-fluid figure-img" width="672">
+<a href="index_files/figure-html/fig-triangle-1.png" class="lightbox" data-gallery="quarto-lightbox-gallery-1" title="Figure&nbsp;1: NAV-error losses, one simulated database, annual granularity. The orange region is known only because the data are synthetic."><img src="index_files/figure-html/fig-triangle-1.png" class="img-fluid figure-img" width="672"></a>
 </div>
 <figcaption class="quarto-float-caption-bottom quarto-float-caption quarto-float-fig" id="fig-triangle-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
 Figure&nbsp;1: NAV-error losses, one simulated database, annual granularity. The orange region is known only because the data are synthetic.
@@ -284,7 +323,7 @@ Figure&nbsp;1: NAV-error losses, one simulated database, annual granularity. The
 <div id="fig-gap" class="quarto-float quarto-figure quarto-figure-center anchored">
 <figure class="quarto-float quarto-float-fig figure">
 <div aria-describedby="fig-gap-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
-<img src="index_files/figure-html/fig-gap-1.png" class="img-fluid figure-img" width="672">
+<a href="index_files/figure-html/fig-gap-1.png" class="lightbox" data-gallery="quarto-lightbox-gallery-2" title="Figure&nbsp;2: Mean loss by origin quarter over 100 simulated databases: true incurred (line) vs.&nbsp;reported by the end of quarter 40 (area)."><img src="index_files/figure-html/fig-gap-1.png" class="img-fluid figure-img" width="672"></a>
 </div>
 <figcaption class="quarto-float-caption-bottom quarto-float-caption quarto-float-fig" id="fig-gap-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
 Figure&nbsp;2: Mean loss by origin quarter over 100 simulated databases: true incurred (line) vs.&nbsp;reported by the end of quarter 40 (area).
@@ -301,6 +340,8 @@ Figure&nbsp;2: Mean loss by origin quarter over 100 simulated databases: true in
 <h3 class="anchored" data-anchor-id="what-the-rest-of-the-site-tests">What the rest of the site tests</h3>
 <p>If the missing amount can be estimated from the shape of past development, a firm can correct its recent loss figures and size a reserve-like buffer. The question we test is <strong>which estimation methods are trustworthy for which event type</strong>, using synthetic data where the true answer is known.</p>
 
+
+<!-- -->
 
 </section>
 </section>
@@ -376,6 +417,57 @@ Figure&nbsp;2: Mean loss by origin quarter over 100 simulated databases: true in
         container: window.document.getElementById('quarto-embedded-source-code-modal')
       });
       clipboardModal.on('success', onCopySuccess);
+    }
+    const viewSource = window.document.getElementById('quarto-view-source') ||
+                       window.document.getElementById('quarto-code-tools-source');
+    if (viewSource) {
+      const sourceUrl = viewSource.getAttribute("data-quarto-source-url");
+      viewSource.addEventListener("click", function(e) {
+        if (sourceUrl) {
+          // rstudio viewer pane
+          if (/\bcapabilities=\b/.test(window.location)) {
+            window.open(sourceUrl);
+          } else {
+            window.location.href = sourceUrl;
+          }
+        } else {
+          const modal = new bootstrap.Modal(document.getElementById('quarto-embedded-source-code-modal'));
+          modal.show();
+        }
+        return false;
+      });
+    }
+    function toggleCodeHandler(show) {
+      return function(e) {
+        const detailsSrc = window.document.querySelectorAll(".cell > details > .sourceCode");
+        for (let i=0; i<detailsSrc.length; i++) {
+          const details = detailsSrc[i].parentElement;
+          if (show) {
+            details.open = true;
+          } else {
+            details.removeAttribute("open");
+          }
+        }
+        const cellCodeDivs = window.document.querySelectorAll(".cell > .sourceCode");
+        const fromCls = show ? "hidden" : "unhidden";
+        const toCls = show ? "unhidden" : "hidden";
+        for (let i=0; i<cellCodeDivs.length; i++) {
+          const codeDiv = cellCodeDivs[i];
+          if (codeDiv.classList.contains(fromCls)) {
+            codeDiv.classList.remove(fromCls);
+            codeDiv.classList.add(toCls);
+          } 
+        }
+        return false;
+      }
+    }
+    const hideAllCode = window.document.getElementById("quarto-hide-all-code");
+    if (hideAllCode) {
+      hideAllCode.addEventListener("click", toggleCodeHandler(false));
+    }
+    const showAllCode = window.document.getElementById("quarto-show-all-code");
+    if (showAllCode) {
+      showAllCode.addEventListener("click", toggleCodeHandler(true));
     }
       var localhostRegex = new RegExp(/^(?:http|https):\/\/localhost\:?[0-9]*\//);
       var mailtoRegex = new RegExp(/^mailto:/);
@@ -706,7 +798,7 @@ Figure&nbsp;2: Mean loss by origin quarter over 100 simulated databases: true in
     }
   });
   </script>
-<nav class="page-navigation">
+<nav class="page-navigation column-body">
   <div class="nav-page nav-page-previous">
   </div>
   <div class="nav-page nav-page-next">
@@ -714,7 +806,156 @@ Figure&nbsp;2: Mean loss by origin quarter over 100 simulated databases: true in
         <span class="nav-page-text">Synthetic Data</span> <i class="bi bi-arrow-right-short"></i>
       </a>
   </div>
-</nav>
+</nav><div class="modal fade" id="quarto-embedded-source-code-modal" tabindex="-1" aria-labelledby="quarto-embedded-source-code-modal-label" aria-hidden="true"><div class="modal-dialog modal-dialog-scrollable"><div class="modal-content"><div class="modal-header"><h5 class="modal-title" id="quarto-embedded-source-code-modal-label">Source Code</h5><button class="btn-close" data-bs-dismiss="modal"></button></div><div class="modal-body"><div class="">
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb1" data-shortcodes="false"><pre class="sourceCode markdown code-with-copy"><code class="sourceCode markdown"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="co">---</span></span>
+<span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a><span class="an">title:</span><span class="co"> "Late-Discovered Operational Risk Events"</span></span>
+<span id="cb1-3"><a href="#cb1-3" aria-hidden="true" tabindex="-1"></a><span class="an">subtitle:</span><span class="co"> "How much loss has already happened but not yet been recorded?"</span></span>
+<span id="cb1-4"><a href="#cb1-4" aria-hidden="true" tabindex="-1"></a><span class="an">execute:</span></span>
+<span id="cb1-5"><a href="#cb1-5" aria-hidden="true" tabindex="-1"></a><span class="co">  echo: false</span></span>
+<span id="cb1-6"><a href="#cb1-6" aria-hidden="true" tabindex="-1"></a><span class="an">author:</span><span class="co"> "Patrick Lefler"</span></span>
+<span id="cb1-7"><a href="#cb1-7" aria-hidden="true" tabindex="-1"></a><span class="an">date:</span><span class="co"> October 8, 2026</span></span>
+<span id="cb1-8"><a href="#cb1-8" aria-hidden="true" tabindex="-1"></a><span class="co">---</span></span>
+<span id="cb1-9"><a href="#cb1-9" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-12"><a href="#cb1-12" aria-hidden="true" tabindex="-1"></a><span class="in">```{r}</span></span>
+<span id="cb1-13"><a href="#cb1-13" aria-hidden="true" tabindex="-1"></a><span class="co">#| label: setup</span></span>
+<span id="cb1-14"><a href="#cb1-14" aria-hidden="true" tabindex="-1"></a><span class="co">#| include: false</span></span>
+<span id="cb1-15"><a href="#cb1-15" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(tidyverse)</span>
+<span id="cb1-16"><a href="#cb1-16" aria-hidden="true" tabindex="-1"></a><span class="cf">for</span> (f <span class="cf">in</span> <span class="fu">list.files</span>(<span class="st">"R"</span>, <span class="at">full.names =</span> <span class="cn">TRUE</span>)) <span class="fu">source</span>(f)</span>
+<span id="cb1-17"><a href="#cb1-17" aria-hidden="true" tabindex="-1"></a>res <span class="ot">&lt;-</span> <span class="fu">load_results</span>()</span>
+<span id="cb1-18"><a href="#cb1-18" aria-hidden="true" tabindex="-1"></a>params <span class="ot">&lt;-</span> <span class="fu">load_params</span>()</span>
+<span id="cb1-19"><a href="#cb1-19" aria-hidden="true" tabindex="-1"></a>aum <span class="ot">&lt;-</span> params<span class="sc">$</span>firm<span class="sc">$</span>aum_usd</span>
+<span id="cb1-20"><a href="#cb1-20" aria-hidden="true" tabindex="-1"></a>s <span class="ot">&lt;-</span> <span class="fu">score_estimates</span>(res<span class="sc">$</span>reps)</span>
+<span id="cb1-21"><a href="#cb1-21" aria-hidden="true" tabindex="-1"></a>gap <span class="ot">&lt;-</span> <span class="fu">incurred_gap</span>(res<span class="sc">$</span>reps) <span class="sc">|&gt;</span> <span class="fu">filter</span>(scenario <span class="sc">==</span> <span class="st">"baseline"</span>, granularity <span class="sc">==</span> <span class="st">"annual"</span>)</span>
+<span id="cb1-22"><a href="#cb1-22" aria-hidden="true" tabindex="-1"></a>g <span class="ot">&lt;-</span> <span class="fu">setNames</span>(gap<span class="sc">$</span>mean_understatement, gap<span class="sc">$</span>type)</span>
+<span id="cb1-23"><a href="#cb1-23" aria-hidden="true" tabindex="-1"></a>ctl <span class="ot">&lt;-</span> <span class="fu">summarise_controls</span>(res<span class="sc">$</span>ctl, params)</span>
+<span id="cb1-24"><a href="#cb1-24" aria-hidden="true" tabindex="-1"></a>r1 <span class="ot">&lt;-</span> ctl <span class="sc">|&gt;</span> <span class="fu">filter</span>(arm <span class="sc">==</span> <span class="st">"recon_automation"</span>)</span>
+<span id="cb1-25"><a href="#cb1-25" aria-hidden="true" tabindex="-1"></a>r2 <span class="ot">&lt;-</span> ctl <span class="sc">|&gt;</span> <span class="fu">filter</span>(arm <span class="sc">==</span> <span class="st">"independent_pnl_verification"</span>)</span>
+<span id="cb1-26"><a href="#cb1-26" aria-hidden="true" tabindex="-1"></a>b0 <span class="ot">&lt;-</span> ctl <span class="sc">|&gt;</span> <span class="fu">filter</span>(arm <span class="sc">==</span> <span class="st">"baseline"</span>)</span>
+<span id="cb1-27"><a href="#cb1-27" aria-hidden="true" tabindex="-1"></a>sc <span class="ot">&lt;-</span> s <span class="sc">|&gt;</span> <span class="fu">filter</span>(kind <span class="sc">==</span> <span class="st">"amount"</span>, scenario <span class="sc">==</span> <span class="st">"baseline"</span>, granularity <span class="sc">==</span> <span class="st">"annual"</span>)</span>
+<span id="cb1-28"><a href="#cb1-28" aria-hidden="true" tabindex="-1"></a>get <span class="ot">&lt;-</span> \(t, m, col) sc[[col]][sc<span class="sc">$</span>type <span class="sc">==</span> t <span class="sc">&amp;</span> sc<span class="sc">$</span>method <span class="sc">==</span> m]</span>
+<span id="cb1-29"><a href="#cb1-29" aria-hidden="true" tabindex="-1"></a>gm <span class="ot">&lt;-</span> <span class="fu">setNames</span>(gap<span class="sc">$</span>median_understatement, gap<span class="sc">$</span>type)</span>
+<span id="cb1-30"><a href="#cb1-30" aria-hidden="true" tabindex="-1"></a>sm <span class="ot">&lt;-</span> <span class="fu">stress_means</span>(res<span class="sc">$</span>reps) <span class="sc">|&gt;</span> <span class="fu">filter</span>(scenario <span class="sc">==</span> <span class="st">"control_improvement"</span>, method <span class="sc">==</span> <span class="st">"Mack (package)"</span>)</span>
+<span id="cb1-31"><a href="#cb1-31" aria-hidden="true" tabindex="-1"></a>sm_get <span class="ot">&lt;-</span> \(t, col) sm[[col]][sm<span class="sc">$</span>type <span class="sc">==</span> t]</span>
+<span id="cb1-32"><a href="#cb1-32" aria-hidden="true" tabindex="-1"></a>tdiff <span class="ot">&lt;-</span> res<span class="sc">$</span>ctl_tail_diff</span>
+<span id="cb1-33"><a href="#cb1-33" aria-hidden="true" tabindex="-1"></a>e_un <span class="ot">&lt;-</span> params<span class="sc">$</span>event_types<span class="sc">$</span>unauthorized_trading<span class="sc">$</span>severity<span class="sc">$</span>lag_elasticity</span>
+<span id="cb1-34"><a href="#cb1-34" aria-hidden="true" tabindex="-1"></a>e_rng <span class="ot">&lt;-</span> <span class="fu">range</span>(<span class="fu">map_dbl</span>(params<span class="sc">$</span>event_types, \(x) x<span class="sc">$</span>severity<span class="sc">$</span>lag_elasticity))</span>
+<span id="cb1-35"><a href="#cb1-35" aria-hidden="true" tabindex="-1"></a>pb <span class="ot">&lt;-</span> <span class="fu">apply_scenario</span>(params, <span class="st">"baseline"</span>)</span>
+<span id="cb1-36"><a href="#cb1-36" aria-hidden="true" tabindex="-1"></a>n_o <span class="ot">&lt;-</span> pb<span class="sc">$</span>horizon<span class="sc">$</span>n_origin</span>
+<span id="cb1-37"><a href="#cb1-37" aria-hidden="true" tabindex="-1"></a>n_l <span class="ot">&lt;-</span> pb<span class="sc">$</span>horizon<span class="sc">$</span>n_lag</span>
+<span id="cb1-38"><a href="#cb1-38" aria-hidden="true" tabindex="-1"></a>sims100 <span class="ot">&lt;-</span> parallel<span class="sc">::</span><span class="fu">mclapply</span>(<span class="dv">1</span><span class="sc">:</span><span class="dv">100</span>, \(r) {</span>
+<span id="cb1-39"><a href="#cb1-39" aria-hidden="true" tabindex="-1"></a>  <span class="fu">simulate_database</span>(pb, <span class="at">rep =</span> r) <span class="sc">|&gt;</span></span>
+<span id="cb1-40"><a href="#cb1-40" aria-hidden="true" tabindex="-1"></a>    <span class="fu">summarise</span>(<span class="at">incurred =</span> <span class="fu">sum</span>(severity), <span class="at">reported =</span> <span class="fu">sum</span>(severity[origin <span class="sc">+</span> lag <span class="sc">&lt;=</span> n_o]), <span class="at">.by =</span> <span class="fu">c</span>(type, origin))</span>
+<span id="cb1-41"><a href="#cb1-41" aria-hidden="true" tabindex="-1"></a>}, <span class="at">mc.cores =</span> <span class="fu">max</span>(<span class="dv">1</span>L, parallel<span class="sc">::</span><span class="fu">detectCores</span>() <span class="sc">-</span> <span class="dv">2</span>L)) <span class="sc">|&gt;</span></span>
+<span id="cb1-42"><a href="#cb1-42" aria-hidden="true" tabindex="-1"></a>  <span class="fu">bind_rows</span>()</span>
+<span id="cb1-43"><a href="#cb1-43" aria-hidden="true" tabindex="-1"></a>beyond_events <span class="ot">&lt;-</span> <span class="fu">beyond_window_share</span>(params)</span>
+<span id="cb1-44"><a href="#cb1-44" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
+<span id="cb1-45"><a href="#cb1-45" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-46"><a href="#cb1-46" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-47"><a href="#cb1-47" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-48"><a href="#cb1-48" aria-hidden="true" tabindex="-1"></a><span class="fu">## The question</span></span>
+<span id="cb1-49"><a href="#cb1-49" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-50"><a href="#cb1-50" aria-hidden="true" tabindex="-1"></a>Operational losses such as trade errors, NAV pricing errors and unauthorized trading are often found long after they happen, and the loss database records them when they are found. So recent periods look cleaner than they are. This is the actuarial incurred-but-not-reported (IBNR) problem, and run-off triangles, analysed with the <span class="in">`ChainLadder`</span> R package, are a natural way to estimate what is missing. Losses are booked in full when discovered, so this is a pure IBNR problem: it does not model later development on events already known (provisions, recoveries, insurance; see <span class="co">[</span><span class="ot">Limitations</span><span class="co">](reproducibility.qmd#sec-limitations)</span>).</span>
+<span id="cb1-51"><a href="#cb1-51" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-52"><a href="#cb1-52" aria-hidden="true" tabindex="-1"></a>::: {.callout-note icon=false }</span>
+<span id="cb1-53"><a href="#cb1-53" aria-hidden="true" tabindex="-1"></a><span class="fu">## Important</span></span>
+<span id="cb1-54"><a href="#cb1-54" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-55"><a href="#cb1-55" aria-hidden="true" tabindex="-1"></a>Everything here comes from a **simulation with assumed parameters**, not from any firm's data. It tests how reserving methods behave when the true answer is known. It does not estimate any real firm's losses.</span>
+<span id="cb1-56"><a href="#cb1-56" aria-hidden="true" tabindex="-1"></a>:::</span>
+<span id="cb1-57"><a href="#cb1-57" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-58"><a href="#cb1-58" aria-hidden="true" tabindex="-1"></a><span class="fu">## What we found (under the assumed generator)</span></span>
+<span id="cb1-59"><a href="#cb1-59" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-60"><a href="#cb1-60" aria-hidden="true" tabindex="-1"></a><span class="ss">1. </span>**Recent reported losses understate the truth, a lot for slow-to-detect events.** For the latest four quarters, the share of true incurred loss not yet in the database averages <span class="in">`r fmt_pct(g[["trade_error"]])`</span> for trade errors, <span class="in">`r fmt_pct(g[["nav_error"]])`</span> for NAV errors and <span class="in">`r fmt_pct(g[["unauthorized_trading"]])`</span> for unauthorized trading. For unauthorized trading the typical (median) database has <span class="in">`r fmt_pct(gm[["unauthorized_trading"]])`</span> of that loss still unrecorded, so in a typical year none of it has been found yet. (<span class="co">[</span><span class="ot">pictures below</span><span class="co">](#sec-problem)</span>)</span>
+<span id="cb1-61"><a href="#cb1-61" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-62"><a href="#cb1-62" aria-hidden="true" tabindex="-1"></a><span class="ss">2. </span>**Standard methods work only where events are plentiful.** Mack and bootstrap chain-ladder are close to unbiased for trade errors (<span class="in">`r fmt_pct(get("trade_error", "mack", "rel_bias"))`</span> and <span class="in">`r fmt_pct(get("trade_error", "boot", "rel_bias"))`</span> relative bias) and acceptable for NAV errors (<span class="in">`r fmt_pct(get("nav_error", "mack", "rel_bias"))`</span> for Mack). Their 95% intervals are somewhat too narrow: Mack covers the truth <span class="in">`r fmt_pct(get("trade_error", "mack", "coverage_usable"))`</span> of the time for trade errors and <span class="in">`r fmt_pct(get("nav_error", "mack", "coverage_usable"))`</span> for NAV errors, while bootstrap covers <span class="in">`r fmt_pct(get("trade_error", "boot", "coverage_usable"))`</span> and <span class="in">`r fmt_pct(get("nav_error", "boot", "coverage_usable"))`</span>. (<span class="co">[</span><span class="ot">Results</span><span class="co">](results.qmd#sec-validation)</span>)</span>
+<span id="cb1-63"><a href="#cb1-63" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-64"><a href="#cb1-64" aria-hidden="true" tabindex="-1"></a><span class="ss">3. </span>**For rare, heavy-tailed unauthorized trading, the standard package implementations mostly cannot run.** Mack was usable in <span class="in">`r get("unauthorized_trading", "mack", "n_usable")`</span> of <span class="in">`r res$meta$n_reps`</span> databases. That is a limit of the <span class="in">`MackChainLadder()`</span> implementation on triangles with empty development columns. Setting those factors to 1 makes Mack run (<span class="in">`r get("unauthorized_trading", "mack_ec", "n_usable")`</span> of <span class="in">`r res$meta$n_reps`</span>), but its relative bias is <span class="in">`r fmt_pct(get("unauthorized_trading", "mack_ec", "rel_bias"))`</span>, its median error <span class="in">`r fmt_pct(get("unauthorized_trading", "mack_ec", "median_rel_err"))`</span> and its interval coverage <span class="in">`r fmt_pct(get("unauthorized_trading", "mack_ec", "coverage_usable"))`</span>; Bornhuetter-Ferguson with an external development pattern is better in the median (<span class="in">`r fmt_pct(get("unauthorized_trading", "bf_benchmark", "median_rel_err"))`</span>) but has no interval and is unstable in the mean. A frequency x severity approach gives a usable estimate (relative bias <span class="in">`r fmt_pct(get("unauthorized_trading", "freq_x_sev", "rel_bias"))`</span>) but its 95% intervals cover only <span class="in">`r fmt_pct(get("unauthorized_trading", "freq_x_sev", "coverage_usable"))`</span>. Only <span class="in">`r fmt_pct(beyond_events[["unauthorized_trading"]], 1)`</span> of unauthorized-trading events are discovered after the 10-year window, yet they carry about <span class="in">`r fmt_pct(tail_share(res$reps, "unauthorized_trading"))`</span> of the true undiscovered loss, because loss grows while an event stays hidden (up to <span class="in">`r sprintf("%.1f", 1 + e_un * n_l)`</span> times the initial size at lag <span class="in">`r n_l`</span>). (<span class="co">[</span><span class="ot">Results</span><span class="co">](results.qmd#sec-amounts)</span>)</span>
+<span id="cb1-65"><a href="#cb1-65" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-66"><a href="#cb1-66" aria-hidden="true" tabindex="-1"></a><span class="ss">4. </span>**A control improvement fools development methods.** If detection gets faster, methods trained on the slower past keep predicting development that no longer occurs. After the improvement, Mack's mean estimate of undiscovered loss is <span class="in">`r fmt_usd(sm_get("Trade errors", "Estimate"), 1)`</span> for trade errors against a true <span class="in">`r fmt_usd(sm_get("Trade errors", "Truth"), 2)`</span>, and <span class="in">`r fmt_usd(sm_get("NAV errors", "Estimate"), 1)`</span> for NAV errors against a true <span class="in">`r fmt_usd(sm_get("NAV errors", "Truth"), 1)`</span>. Restricting the development factors to the latest three diagonals removes most of the trade-error gap. (<span class="co">[</span><span class="ot">Results</span><span class="co">](results.qmd#sec-stress)</span>)</span>
+<span id="cb1-67"><a href="#cb1-67" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-68"><a href="#cb1-68" aria-hidden="true" tabindex="-1"></a><span class="ss">5. </span>**Faster detection mainly buys earlier information; the dollar savings rest on one assumption.** Expected annual loss is <span class="in">`r fmt_usd(b0$mean_incurred_per_year)`</span> (<span class="in">`r sprintf("%.0f", b0$mean_incurred_per_year / aum * 1e4)`</span> bps of a $5B firm). The two example controls save <span class="in">`r fmt_usd(r1$mean_saving_per_year, 2)`</span> and <span class="in">`r fmt_usd(r2$mean_saving_per_year, 2)`</span> a year against assumed costs of <span class="in">`r fmt_usd(r1$annual_cost, 1)`</span> and <span class="in">`r fmt_usd(r2$annual_cost, 1)`</span>: close to break-even on the mean, with 95% expected shortfall falling from <span class="in">`r fmt_usd(b0$annual_es95)`</span> to <span class="in">`r fmt_usd(r1$annual_es95)`</span> and <span class="in">`r fmt_usd(r2$annual_es95)`</span> (the reduction under reconciliation automation has a paired 95% bootstrap interval of <span class="in">`r fmt_usd(tdiff$es95_reduction_lo[tdiff$arm == "recon_automation"])`</span> to <span class="in">`r fmt_usd(tdiff$es95_reduction_hi[tdiff$arm == "recon_automation"])`</span>). Both the mean and the tail savings exist only because simulated losses grow while undiscovered (<span class="in">`r sprintf("%.2f", e_rng[1])`</span> to <span class="in">`r sprintf("%.2f", e_rng[2])`</span> per quarter in this model); with no growth both vanish. What remains is earlier information: undiscovered loss at year 10 falls from <span class="in">`r fmt_usd(b0$mean_undiscovered)`</span> to <span class="in">`r fmt_usd(r1$mean_undiscovered)`</span> and <span class="in">`r fmt_usd(r2$mean_undiscovered)`</span>. (<span class="co">[</span><span class="ot">Control value</span><span class="co">](controls.qmd)</span>)</span>
+<span id="cb1-69"><a href="#cb1-69" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-70"><a href="#cb1-70" aria-hidden="true" tabindex="-1"></a><span class="fu">## What this means for a COO or CRO (conditional on the above)</span></span>
+<span id="cb1-71"><a href="#cb1-71" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-72"><a href="#cb1-72" aria-hidden="true" tabindex="-1"></a><span class="ss">- </span>Treat the most recent year of loss data for slow-detection event types as incomplete, and say so when reporting trends.</span>
+<span id="cb1-73"><a href="#cb1-73" aria-hidden="true" tabindex="-1"></a><span class="ss">- </span>Do not apply a standard development method blindly to rare, large-loss events; use a frequency-severity view and an explicit tail assumption.</span>
+<span id="cb1-74"><a href="#cb1-74" aria-hidden="true" tabindex="-1"></a><span class="ss">- </span>Judge a detection control by **how much of its promised lag reduction it must deliver to break even**, not by a single point ROI.</span>
+<span id="cb1-75"><a href="#cb1-75" aria-hidden="true" tabindex="-1"></a><span class="ss">- </span>Check how your loss data feeds capital and compensation. For banks, the Basel III Standardised Approach (SMA) builds its Loss Component from about ten years of internal loss data, so late-discovered losses enter by date of accounting and the latest years understate exposure. For asset managers, NAV-error compensation is recognised when the error is found, so the most recent loss trend understates exposure in the same way. Confirm the exact treatment against your own regulator's rules.</span>
+<span id="cb1-76"><a href="#cb1-76" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-77"><a href="#cb1-77" aria-hidden="true" tabindex="-1"></a><span class="fu">### Which method for which event type</span></span>
+<span id="cb1-78"><a href="#cb1-78" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-79"><a href="#cb1-79" aria-hidden="true" tabindex="-1"></a><span class="pp">|</span> Event type <span class="pp">|</span> What the tests support <span class="pp">|</span> Not supported <span class="pp">|</span></span>
+<span id="cb1-80"><a href="#cb1-80" aria-hidden="true" tabindex="-1"></a><span class="pp">|---|---|---|</span></span>
+<span id="cb1-81"><a href="#cb1-81" aria-hidden="true" tabindex="-1"></a><span class="pp">|</span> Trade errors <span class="pp">|</span> Mack or bootstrap chain-ladder; treat intervals as slightly narrow <span class="pp">|</span> Clark curves (degenerate fits; see <span class="co">[</span><span class="ot">Results</span><span class="co">](results.qmd#sec-amounts)</span>) <span class="pp">|</span></span>
+<span id="cb1-82"><a href="#cb1-82" aria-hidden="true" tabindex="-1"></a><span class="pp">|</span> NAV errors <span class="pp">|</span> Mack, with bootstrap or Bornhuetter-Ferguson as a cross-check; Clark Cape Cod also scores well here but fails badly on trade errors <span class="pp">|</span> Reading intervals as exact 95% <span class="pp">|</span></span>
+<span id="cb1-83"><a href="#cb1-83" aria-hidden="true" tabindex="-1"></a><span class="pp">|</span> Unauthorized trading <span class="pp">|</span> Frequency x severity plus an explicit tail assumption, reported with a wide caveat <span class="pp">|</span> Standard package chain-ladder (no usable fits); Exposure-based methods such as Bornhuetter-Ferguson are not yet tested here <span class="pp">|</span></span>
+<span id="cb1-84"><a href="#cb1-84" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-85"><a href="#cb1-85" aria-hidden="true" tabindex="-1"></a>To use this on real data you would replace each assumed parameter as listed under <span class="co">[</span><span class="ot">Limitations</span><span class="co">](reproducibility.qmd#sec-limitations)</span>; the <span class="co">[</span><span class="ot">Reproducibility</span><span class="co">](reproducibility.qmd)</span> page shows how to rebuild everything.</span>
+<span id="cb1-86"><a href="#cb1-86" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-87"><a href="#cb1-87" aria-hidden="true" tabindex="-1"></a><span class="fu">## The problem in pictures {#sec-problem}</span></span>
+<span id="cb1-88"><a href="#cb1-88" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-89"><a href="#cb1-89" aria-hidden="true" tabindex="-1"></a><span class="fu">### Why recent periods look clean</span></span>
+<span id="cb1-90"><a href="#cb1-90" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-91"><a href="#cb1-91" aria-hidden="true" tabindex="-1"></a>A loss event database is organised by when an event was **discovered**, not when it **happened**. A trade error booked on Monday may be found by reconciliation the same week. A mispriced NAV may surface a year later. An unauthorized position can run for several years.</span>
+<span id="cb1-92"><a href="#cb1-92" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-93"><a href="#cb1-93" aria-hidden="true" tabindex="-1"></a>So at any evaluation date, the most recent origin periods have had the least time to be discovered. Their recorded losses are low *because the events have not yet been found*, not necessarily because controls improved. This is the same structure as incurred-but-not-reported (IBNR) claims in insurance reserving, and a run-off triangle is the natural way to see it.</span>
+<span id="cb1-94"><a href="#cb1-94" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-95"><a href="#cb1-95" aria-hidden="true" tabindex="-1"></a><span class="fu">### One synthetic database, as a triangle</span></span>
+<span id="cb1-96"><a href="#cb1-96" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-97"><a href="#cb1-97" aria-hidden="true" tabindex="-1"></a>Rows are origin periods (years), columns are discovery lags (years after origin). A cell holds the loss from events that originated in that row and were discovered that many years later. The database can only fill the upper-left; the lower-right (orange) is real loss that exists but has not been discovered.</span>
+<span id="cb1-98"><a href="#cb1-98" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-101"><a href="#cb1-101" aria-hidden="true" tabindex="-1"></a><span class="in">```{r}</span></span>
+<span id="cb1-102"><a href="#cb1-102" aria-hidden="true" tabindex="-1"></a><span class="co">#| label: fig-triangle</span></span>
+<span id="cb1-103"><a href="#cb1-103" aria-hidden="true" tabindex="-1"></a><span class="co">#| fig-cap: "NAV-error losses, one simulated database, annual granularity. The orange region is known only because the data are synthetic."</span></span>
+<span id="cb1-104"><a href="#cb1-104" aria-hidden="true" tabindex="-1"></a><span class="co">#| fig-height: 4.6</span></span>
+<span id="cb1-105"><a href="#cb1-105" aria-hidden="true" tabindex="-1"></a>events <span class="ot">&lt;-</span> <span class="fu">simulate_database</span>(pb, <span class="at">rep =</span> <span class="dv">1</span>)</span>
+<span id="cb1-106"><a href="#cb1-106" aria-hidden="true" tabindex="-1"></a>sq <span class="ot">&lt;-</span> <span class="fu">build_square</span>(events, <span class="st">"nav_error"</span>, <span class="st">"amount"</span>, n_o, n_l, <span class="at">period =</span> <span class="dv">4</span>)<span class="sc">$</span>square</span>
+<span id="cb1-107"><a href="#cb1-107" aria-hidden="true" tabindex="-1"></a><span class="fu">plot_triangle</span>(sq, <span class="st">"NAV errors: recorded vs. not yet discovered"</span>, <span class="st">"Loss"</span>)</span>
+<span id="cb1-108"><a href="#cb1-108" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
+<span id="cb1-109"><a href="#cb1-109" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-110"><a href="#cb1-110" aria-hidden="true" tabindex="-1"></a>**How to read the plot** <span class="dt">&lt;</span><span class="kw">br</span><span class="dt">/&gt;</span></span>
+<span id="cb1-111"><a href="#cb1-111" aria-hidden="true" tabindex="-1"></a>Each row is a year in which errors happened, and each column is how many years later they were found. Blue boxes are losses already found and recorded, with darker blue meaning a larger loss. Orange boxes are real losses that exist but have not been found yet, which we can show only because the data are simulated.</span>
+<span id="cb1-112"><a href="#cb1-112" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-113"><a href="#cb1-113" aria-hidden="true" tabindex="-1"></a>**What the plot tells you** <span class="dt">&lt;</span><span class="kw">br</span><span class="dt">/&gt;</span></span>
+<span id="cb1-114"><a href="#cb1-114" aria-hidden="true" tabindex="-1"></a>The most recent years (bottom rows) are mostly unfilled because their losses have not had time to surface, so they look cleaner than they are. Loss can also arrive a year or more late: the biggest orange box is year 10's losses expected to be found one year later.</span>
+<span id="cb1-115"><a href="#cb1-115" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-116"><a href="#cb1-116" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-117"><a href="#cb1-117" aria-hidden="true" tabindex="-1"></a><span class="fu">### The artifact: reported losses fall, true losses do not</span></span>
+<span id="cb1-118"><a href="#cb1-118" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-121"><a href="#cb1-121" aria-hidden="true" tabindex="-1"></a><span class="in">```{r}</span></span>
+<span id="cb1-122"><a href="#cb1-122" aria-hidden="true" tabindex="-1"></a><span class="co">#| label: fig-gap</span></span>
+<span id="cb1-123"><a href="#cb1-123" aria-hidden="true" tabindex="-1"></a><span class="co">#| fig-cap: "Mean loss by origin quarter over 100 simulated databases: true incurred (line) vs. reported by the end of quarter 40 (area)."</span></span>
+<span id="cb1-124"><a href="#cb1-124" aria-hidden="true" tabindex="-1"></a><span class="co">#| fig-height: 5</span></span>
+<span id="cb1-125"><a href="#cb1-125" aria-hidden="true" tabindex="-1"></a>by_origin <span class="ot">&lt;-</span> sims100 <span class="sc">|&gt;</span></span>
+<span id="cb1-126"><a href="#cb1-126" aria-hidden="true" tabindex="-1"></a>  <span class="fu">summarise</span>(<span class="fu">across</span>(<span class="fu">c</span>(incurred, reported), mean), <span class="at">.by =</span> <span class="fu">c</span>(type, origin)) <span class="sc">|&gt;</span></span>
+<span id="cb1-127"><a href="#cb1-127" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(<span class="at">type =</span> <span class="fu">factor</span>(type_lab[type], <span class="at">levels =</span> type_lab))</span>
+<span id="cb1-128"><a href="#cb1-128" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-129"><a href="#cb1-129" aria-hidden="true" tabindex="-1"></a><span class="fu">ggplot</span>(by_origin, <span class="fu">aes</span>(origin)) <span class="sc">+</span></span>
+<span id="cb1-130"><a href="#cb1-130" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_area</span>(<span class="fu">aes</span>(<span class="at">y =</span> reported, <span class="at">fill =</span> type), <span class="at">alpha =</span> <span class="fl">0.55</span>) <span class="sc">+</span></span>
+<span id="cb1-131"><a href="#cb1-131" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_line</span>(<span class="fu">aes</span>(<span class="at">y =</span> incurred, <span class="at">colour =</span> type), <span class="at">linewidth =</span> <span class="fl">0.7</span>) <span class="sc">+</span></span>
+<span id="cb1-132"><a href="#cb1-132" aria-hidden="true" tabindex="-1"></a>  <span class="fu">facet_wrap</span>(<span class="sc">~</span>type, <span class="at">ncol =</span> <span class="dv">1</span>, <span class="at">scales =</span> <span class="st">"free_y"</span>) <span class="sc">+</span></span>
+<span id="cb1-133"><a href="#cb1-133" aria-hidden="true" tabindex="-1"></a>  <span class="fu">scale_fill_manual</span>(<span class="at">values =</span> type_col, <span class="at">guide =</span> <span class="st">"none"</span>) <span class="sc">+</span></span>
+<span id="cb1-134"><a href="#cb1-134" aria-hidden="true" tabindex="-1"></a>  <span class="fu">scale_colour_manual</span>(<span class="at">values =</span> type_col, <span class="at">guide =</span> <span class="st">"none"</span>) <span class="sc">+</span></span>
+<span id="cb1-135"><a href="#cb1-135" aria-hidden="true" tabindex="-1"></a>  <span class="fu">scale_y_continuous</span>(<span class="at">labels =</span> fmt_usd) <span class="sc">+</span></span>
+<span id="cb1-136"><a href="#cb1-136" aria-hidden="true" tabindex="-1"></a>  <span class="fu">labs</span>(<span class="at">x =</span> <span class="st">"Origin quarter"</span>, <span class="at">y =</span> <span class="st">"Mean loss per origin quarter"</span>, <span class="at">title =</span> <span class="st">"Reported losses understate recent incurred losses"</span>) <span class="sc">+</span></span>
+<span id="cb1-137"><a href="#cb1-137" aria-hidden="true" tabindex="-1"></a>  <span class="fu">theme_op</span>()</span>
+<span id="cb1-138"><a href="#cb1-138" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
+<span id="cb1-139"><a href="#cb1-139" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-140"><a href="#cb1-140" aria-hidden="true" tabindex="-1"></a>**How to read the plot.** <span class="dt">&lt;</span><span class="kw">br</span><span class="dt">/&gt;</span></span>
+<span id="cb1-141"><a href="#cb1-141" aria-hidden="true" tabindex="-1"></a>For each event type, the line is the true loss that actually happened in each quarter, and the shaded area is the part of it the database has recorded by the end of quarter 40. Where the shading falls below the line, loss has occurred but is not yet visible.</span>
+<span id="cb1-142"><a href="#cb1-142" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-143"><a href="#cb1-143" aria-hidden="true" tabindex="-1"></a>**What the plot tells you.** <span class="dt">&lt;</span><span class="kw">br</span><span class="dt">/&gt;</span></span>
+<span id="cb1-144"><a href="#cb1-144" aria-hidden="true" tabindex="-1"></a>Recorded loss drops away in the most recent quarters while true loss does not, so a falling trend in recent reports can be an artifact of late discovery and not a real improvement. For the latest four origin quarters in the baseline scenario, the share of true incurred loss that is not yet in the database averages <span class="in">`{r} fmt_pct(g[["trade_error"]])`</span> for trade errors, </span>
+<span id="cb1-145"><a href="#cb1-145" aria-hidden="true" tabindex="-1"></a><span class="in">`{r} fmt_pct(g[["nav_error"]])`</span> for NAV errors and <span class="in">`{r} fmt_pct(g[["unauthorized_trading"]])`</span> for unauthorized trading. <span class="dt">&lt;</span><span class="kw">br</span><span class="dt">/&gt;</span></span>
+<span id="cb1-146"><a href="#cb1-146" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-147"><a href="#cb1-147" aria-hidden="true" tabindex="-1"></a>For unauthorized trading the typical (median) database has <span class="in">`{r} fmt_pct(gm[["unauthorized_trading"]])`</span> of that loss still unrecorded, and its largest losses, the spikes in the chart, are often not yet visible at all. These shares depend on the assumed lag distributions (see Synthetic Data); they illustrate the mechanism, not any real firm.</span>
+<span id="cb1-148"><a href="#cb1-148" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-149"><a href="#cb1-149" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-150"><a href="#cb1-150" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-151"><a href="#cb1-151" aria-hidden="true" tabindex="-1"></a><span class="fu">### What the rest of the site tests</span></span>
+<span id="cb1-152"><a href="#cb1-152" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-153"><a href="#cb1-153" aria-hidden="true" tabindex="-1"></a>If the missing amount can be estimated from the shape of past development, a firm can correct its recent loss figures and size a reserve-like buffer. The question we test is **which estimation methods are trustworthy for which event type**, using synthetic data where the true answer is known.</span>
+</code></pre></div><button title="Copy to Clipboard" class="code-copy-button" data-in-quarto-modal=""><i class="bi"></i></button></div>
+</div></div></div></div></div>
 </div> <!-- /content -->
 <footer class="footer">
   <div class="nav-footer">
@@ -729,8 +970,41 @@ Figure&nbsp;2: Mean loss by origin quarter over 100 simulated databases: true in
     </div>
   </div>
 </footer>
+<script>var lightboxQuarto = GLightbox({"closeEffect":"zoom","descPosition":"bottom","loop":false,"openEffect":"zoom","selector":".lightbox"});
+(function() {
+  let previousOnload = window.onload;
+  window.onload = () => {
+    if (previousOnload) {
+      previousOnload();
+    }
+    lightboxQuarto.on('slide_before_load', (data) => {
+      const { slideIndex, slideNode, slideConfig, player, trigger } = data;
+      const href = trigger.getAttribute('href');
+      if (href !== null) {
+        const imgEl = window.document.querySelector(`a[href="${href}"] img`);
+        if (imgEl !== null) {
+          const srcAttr = imgEl.getAttribute("src");
+          if (srcAttr && srcAttr.startsWith("data:")) {
+            slideConfig.href = srcAttr;
+          }
+        }
+      } 
+    });
+  
+    lightboxQuarto.on('slide_after_load', (data) => {
+      const { slideIndex, slideNode, slideConfig, player, trigger } = data;
+      if (window.Quarto?.typesetMath) {
+        window.Quarto.typesetMath(slideNode);
+      }
+    });
+  
+  };
+  
+})();
+          </script>
 
 
 
 
+<script src="site_libs/quarto-html/zenscroll-min.js"></script>
 </body></html>
