@@ -11,84 +11,48 @@ execute:
 library(tidyverse)
 for (f in list.files("R", full.names = TRUE)) source(f)
 res <- load_results()
-git_state <- function() {
-  sha <- tryCatch(system2("git", c("rev-parse", "--short", "HEAD"), stdout = TRUE, stderr = FALSE), error = \(e) character())
-  dirty <- tryCatch(length(system2("git", c("status", "--porcelain", "--untracked-files=no"), stdout = TRUE, stderr = FALSE)) > 0, error = \(e) NA)
-  if (length(sha) == 0) "not a git checkout" else paste0(sha, if (isTRUE(dirty)) " (uncommitted changes)" else "")
-}
 ```
 
 This page documents how to rebuild every number on the site, and checks a few of those claims live: the tests, the environment status and the parameter staleness check re-run every time this page is rendered (it is excluded from the project-wide `freeze: auto` cache).
 
-## One command
-The GitHub repository can be found [here](https://github.com/patrick-lefler/late-discovered-operational-risk-events). From a clean clone:
+## Quick start {#quick-start}
 
-```sh
-Rscript -e 'renv::restore()'   # once: package versions from renv.lock
+The code and data are in the GitHub repository [patrick-lefler/late-discovered-operational-risk-events](https://github.com/patrick-lefler/late-discovered-operational-risk-events). To rebuild everything from a clean copy:
+
+```bash
+git clone https://github.com/patrick-lefler/late-discovered-operational-risk-events
+cd late-discovered-operational-risk-events
+Rscript -e 'renv::restore()'   # once: install the package versions pinned in renv.lock
 Rscript run_all.R               # simulations -> mlReserve experiment -> site in docs/
 ```
 
-`run_all.R` runs `run_simulations.R` (replications, control study, break-even), installs the pinned `mlReserve` fork into an isolated library if needed and runs `run_mlreserve.R`, then calls `quarto render`.
+`run_all.R` runs `run_simulations.R` (replications, control study, break-even), installs the pinned `mlReserve` fork into an isolated library if needed and runs `run_mlreserve.R`, then calls `quarto render`. The rendered site is written to `docs/`.
 
-## Environment status {#env-status}
+## Environment {#environment}
 
 ```{r}
 #| label: env
-tibble(
-  Item = c("Rendered", "Project git commit", "R", "Platform", "ChainLadder (CRAN, used for all headline results)", "mlReserve fork (isolated library)", "Fork commit", "Quarto"),
-  Value = c(format(Sys.time(), "%Y-%m-%d %H:%M %Z"), git_state(), R.version.string, R.version$platform, as.character(packageVersion("ChainLadder")),
-            readRDS("data/mlreserve.rds")$fork_version, readRDS("data/mlreserve.rds")$commit,
-            trimws(system2("quarto", "--version", stdout = TRUE)))
-) |> gt::gt()
-```
-
-The package versions are pinned in `renv.lock`. Status of the project library against the lockfile:
-
-```{r}
-#| label: renv-status
 #| echo: false
-out <- capture.output(renv::status())
-cat(out, sep = "\n")
+mlr <- readRDS("data/mlreserve.rds")
+repro_env_table(
+  packages = "ChainLadder",
+  extra = tibble(
+    Item = c("mlReserve fork (isolated library)", "Fork commit"),
+    Value = c(mlr$fork_version, mlr$commit)
+  )
+) |>
+  gt::gt()
 ```
+
+**How to read the table** <br/>
+Each row is one piece of software this page was built with and its version. The "Packages" row says whether the installed R packages match the versions pinned in `renv.lock`. `ChainLadder` produces all headline results; the `mlReserve` fork is used only in the ML appendix.
+
+**What the table tells you** <br/>
+If your versions match these and the packages are in sync, rebuilding the project should give the same numbers. If they differ, small differences in the results may come from the software rather than the analysis.
 
 The experimental fork is installed from GitHub at the pinned commit into `lib_mlreserve/`, outside renv, so installing it cannot change the CRAN ChainLadder version.
 
-## Randomness
-
-All randomness is seeded explicitly, so results do not depend on how many cores are used (tested). A master seed in `params.yaml` (`master_seed`) generates a seed for every stream:
-
-```{r}
-#| label: seed-code
-#| echo: true
-derive_seed
-```
-
-Seeds depend on the replication number, the scenario index and the event-type index, so the same replication in different scenarios shares nothing accidentally, and the baseline and control arms of the control study share seeds on purpose (paired comparison). Bootstrap and frequency-severity simulations take a seed derived the same way.
-
-## Parameters
-
-Every simulator parameter lives in one file. `status: assumption` marks values that are plausible choices, not calibrated estimates.
-
-::: {.callout-note icon = false collapse="true"}
-## params.yaml information
-
-```{r}
-#| label: params-yaml
-#| results: asis
-cat("```yaml\n", paste(readLines("params.yaml"), collapse = "\n"), "\n```\n", sep = "")
-```
-:::
-
-```{r}
-#| label: params-count
-leaf <- unlist(yaml::read_yaml("params.yaml"))
-n_leaf <- length(leaf)
-n_assump <- sum(grepl("status$", names(leaf)) & leaf == "assumption")
-```
-
-The file holds `r n_leaf` leaf values in `r n_assump` blocks marked as assumptions. No parameter is calibrated to data in this version.
-
-## Data lineage
+## Data {#data}
 
 Generated data are outputs, not sources of truth: the generator and `params.yaml` are. Content hashes (SHA-256 of the deserialised object, serialised with R serialization version 3 so they do not depend on the R release) let you confirm you reproduced the same results.
 
@@ -115,7 +79,40 @@ fresh <- identical(current_md5, res$meta$params_md5)
 
 **Staleness check:** `params.yaml` has `r if (fresh) "not changed" else "CHANGED"` since the results were generated (`r if (fresh) "results are current" else "re-run run_simulations.R before trusting this site"`). Results were produced `r res$meta$finished` with `r res$meta$n_reps` replications on `r res$meta$n_cores` workers.
 
-## Tests
+## Parameters and seeds {#parameters}
+
+Every simulator parameter lives in one file. `status: assumption` marks values that are plausible choices, not calibrated estimates.
+
+::: {.callout-note icon="false" collapse="true"}
+## params.yaml
+
+```{r}
+#| label: params-yaml
+#| results: asis
+cat("```yaml\n", paste(readLines("params.yaml"), collapse = "\n"), "\n```\n", sep = "")
+```
+:::
+
+```{r}
+#| label: params-count
+leaf <- unlist(yaml::read_yaml("params.yaml"))
+n_leaf <- length(leaf)
+n_assump <- sum(grepl("status$", names(leaf)) & leaf == "assumption")
+```
+
+The file holds `r n_leaf` leaf values in `r n_assump` blocks marked as assumptions. No parameter is calibrated to data in this version.
+
+All randomness is seeded explicitly, so results do not depend on how many cores are used (tested). A master seed in `params.yaml` (`master_seed`) generates a seed for every stream:
+
+```{r}
+#| label: seed-code
+#| echo: true
+derive_seed
+```
+
+Seeds depend on the replication number, the scenario index and the event-type index, so the same replication in different scenarios shares nothing accidentally, and the baseline and control arms of the control study share seeds on purpose (paired comparison). Bootstrap and frequency-severity simulations take a seed derived the same way.
+
+## Tests {#tests}
 
 The suite is run each time this page is rendered:
 
@@ -144,21 +141,23 @@ What the tests cover:
 - Scoring and control functions are checked against hand-computed values.
 - A replication run is identical on 1 and 2 cores.
 
-## Caching and runtime
+## Caching {#caching}
 
 Pages cache their chunk results with Quarto `freeze: auto`; a page re-executes when its source changes. To force a full rebuild, delete `_freeze/` and `docs/`. The heavy computation is not in the pages at all: it is in `run_simulations.R`, which took `r round(res$meta$replication_seconds / 60, 1)` minutes for the replications and `r round(res$meta$control_seconds, 0)` seconds for the control study and break-even on this run.
 
-## Known limits of reproducibility
+## Known limitations {#limitations}
+
+### Limits of reproducibility {#repro-limits}
 
 - Bit-for-bit equality is expected only on the same platform and package versions. Floating-point and BLAS differences across machines can change low-order digits, and occasionally the optimiser path of the Clark fits.
 - The `mlReserve` fork is a moving target on GitHub; the pinned commit keeps the experiment fixed, but the fork could disappear.
 - Quarto and Typst versions affect rendering, not the numbers.
 
-## Limitations and model risk {#sec-limitations}
+### Model limitations {#sec-limitations}
 
 This project tests how estimation methods behave on **data we generated**. That is its strength (the true answer is known) and its main limitation (the answer holds only for this generator).
 
-### Key limitations
+#### Key limitations
 
 1. **Synthetic, uncalibrated parameters.** Frequencies, lag distributions, severities and control effects are assumptions chosen for plausibility. Different values would change the numbers, and may change which method works.
 2. **The generator and the methods share structure.** Discovery lag is independent of origin period apart from the explicit scenarios, which is close to what chain-ladder assumes. Real loss databases have reporting-policy changes, system migrations and batch back-fills that create calendar-period effects the baseline does not contain.
@@ -177,7 +176,7 @@ This project tests how estimation methods behave on **data we generated**. That 
 15. **Pure IBNR only.** Loss is booked in full at discovery, so there is no development on events already known (provisions, recoveries, insurance). The terminology here is IBNR, not IBNER.
 16. **The benchmark development pattern is the generator's own.** The Bornhuetter-Ferguson variant with an external pattern shows what an accurate prior pattern buys; with a pattern that is itself wrong it would do worse, and the study does not test that.
 
-### What would change the conclusions
+#### What would change the conclusions
 
 | If we found... | Effect |
 |---|---|
@@ -188,7 +187,7 @@ This project tests how estimation methods behave on **data we generated**. That 
 | Losses arrive in clusters from a common failure | Chain-ladder variance is understated; Bornhuetter-Ferguson with a pooled pattern is preferred |
 | Real collection threshold of $10k or more | The trade-error triangle is mostly empty and the standard methods have little to work with |
 
-### What client data would replace each assumption
+#### What client data would replace each assumption
 
 | Synthetic parameter | Client source |
 |---|---|
@@ -200,7 +199,7 @@ This project tests how estimation methods behave on **data we generated**. That 
 | Control cost | Vendor quotes and internal run cost |
 | Firm size | Actual AUM and trade volumes |
 
-### Use of the results
+#### Use of the results
 
 The numbers on this site are illustrations of method behaviour. They should not be quoted as estimates of any firm's undiscovered losses or as a benchmark for the value of a particular control.
 
@@ -216,11 +215,11 @@ The code on this site is released under the [MIT License](license.qmd). All data
 
 The packages are installed from their sources at build time and are not redistributed in this repository.
 
-## Software environment {#environment}
+## Session information {#session-info}
 
-The site was built with R and Quarto. The analysis loads `tidyverse`, `dplyr` and `ChainLadder`, and also calls `gt`, `scales`, `yaml`, `digest`, `testthat`, `renv` and `sessioninfo`; the ML appendix runs the `mlReserve` fork with `ranger` and `e1071` from the isolated `lib_mlreserve/` library (see [Environment status](#env-status)). Package versions are pinned in `renv.lock`; run `renv::restore()` to install them.
+The site was built with R and Quarto. The analysis loads `tidyverse`, `dplyr` and `ChainLadder`, and also calls `gt`, `scales`, `yaml`, `digest`, `testthat`, `renv` and `sessioninfo`; the ML appendix runs the `mlReserve` fork with `ranger` and `e1071` from the isolated `lib_mlreserve/` library (see [Environment](#environment)). Package versions are pinned in `renv.lock`; run `renv::restore()` to install them.
 
-::: {.callout-note icon = false collapse="true"}
+::: {.callout-note icon="false" collapse="true"}
 ## Full R session information
 ```{r}
 #| label: session-information
