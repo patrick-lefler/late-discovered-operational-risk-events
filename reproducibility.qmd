@@ -17,7 +17,7 @@ This page documents how to rebuild every number on the site, and checks a few of
 
 ## Quick start {#quick-start}
 
-The code and data are in the GitHub repository [patrick-lefler/late-discovered-operational-risk-events](https://github.com/patrick-lefler/late-discovered-operational-risk-events). To rebuild everything from a clean copy:
+The code and data are in the GitHub repository [here](https://github.com/patrick-lefler/late-discovered-operational-risk-events). To rebuild everything from a clean copy:
 
 ```bash
 git clone https://github.com/patrick-lefler/late-discovered-operational-risk-events

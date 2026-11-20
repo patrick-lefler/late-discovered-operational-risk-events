@@ -7,3 +7,6 @@ lib_mlreserve/
 **/*.quarto_ipynb
 brief.pdf
 temp.R
+
+# Quarto writes this on every render even with search off; unused
+docs/search.json
